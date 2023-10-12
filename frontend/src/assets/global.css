@@ -1,0 +1,689 @@
+* {
+  box-sizing: border-box;
+  text-decoration: none;
+  transition: all ease-out 0.3s;
+}
+
+:root {
+  --edit-green: rgb(0, 206, 0);
+  --cancel-red: rgb(253, 22, 22);
+}
+#body {
+  height: 100%;
+  width: 100%;
+}
+/* -------login css ----- */
+.login-fullpage-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #71b7eb, #9b59b6);
+}
+.login-form-container {
+  background-color: #ffff;
+  position: relative;
+  box-shadow: 0px 0px 2rem 1rem rgba(0, 0, 0, 0.3);
+  width: 400px;
+  height: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.login-title {
+  font-weight: 600;
+  font-size: 2.5rem;
+  color: grey;
+}
+.userid-outer,
+.password-outer {
+  padding-left: 0.5cm;
+  gap: 1rem;
+  border: 4px solid #ffff;
+  position: relative;
+  width: 80%;
+  height: 4rem;
+  display: flex;
+  border-bottom: 4px solid grey;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+.underline {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 1px;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  background-color: blue;
+  transform: scaleX(0);
+}
+
+.userid-outer input,
+.password-outer input {
+  font-size: larger;
+  width: 80%;
+  height: 70%;
+  outline: none;
+  border: none;
+}
+input::placeholder {
+  color: grey;
+}
+#userid-icon,
+#password-icon {
+  font-size: 2rem;
+  color: grey;
+  left: 0;
+}
+.fgnew {
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+input:hover ~ .underline,
+input:focus ~ .underline,
+input:valid ~ .underline {
+  transition: all ease 0.3s;
+  transform: scaleX(1);
+}
+.errorfield {
+  transition: none;
+  background-color: rgb(217, 48, 37);
+}
+.errorouter {
+  color: rgb(217, 48, 37);
+  border-color: #d93025;
+  border-radius: 8px;
+}
+.errormsg {
+  display: none;
+}
+.showerror {
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  gap: 8px;
+  align-items: center;
+  color: red;
+  position: absolute;
+  left: 0;
+  bottom: -2rem;
+}
+/*-----register css------*/
+.form-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: rgb(255, 255, 171);
+  /* margin-top: 3rem;
+  margin-bottom: 3rem; */
+  padding-top: 1rem;
+}
+#title {
+  font-size: 2.5rem;
+  margin-top: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+.profile {
+  padding-top: 0.6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  height: 14rem;
+  justify-content: space-evenly;
+}
+.profile label {
+  font-size: 20px;
+  font-weight: 400;
+}
+.profile_input {
+  position: absolute;
+  display: none;
+  width: 100%;
+  height: 100%;
+
+  left: 0;
+  right: 0;
+}
+.profile_outer {
+  position: relative;
+  width: 8rem;
+  height: 8rem;
+  overflow: hidden;
+  border-radius: 50%;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+img:hover {
+  opacity: 0.5;
+}
+.input {
+  outline: none;
+  border-radius: 10px;
+  height: 100%;
+  border: solid rgb(204, 204, 204);
+  font-size: large;
+  font-weight: 400;
+  padding-left: 15px;
+}
+
+.inputdiv label {
+  font-size: larger;
+  font-weight: 500;
+}
+.input:focus,
+select:focus,
+select:hover,
+select:valid {
+  transition: border ease 0.8s;
+  border-color: rgb(44, 44, 241);
+}
+.errorFieldMsg{
+  position: absolute;
+  bottom: -.5cm;
+  height: 20px;
+  color: #d93025;
+}
+select {
+  outline: none;
+  border-radius: 10px;
+  height: 1.2cm;
+  padding-left: 15px;
+  background-color: #fff;
+  border: solid rgb(204, 204, 204);
+  font-size: larger;
+}
+select option {
+  font-family: sans-serif;
+  font-weight: 100;
+}
+section {
+  margin-top: 1cm;
+  margin-bottom: 1cm;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  gap: 1rem;
+  width: 100%;
+  align-items: center;
+}
+.inputdiv {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  height: 5rem;
+  width: 9cm;
+  justify-content: space-evenly;
+}
+.radio {
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.radio span {
+  display: flex;
+  margin-right: 8px;
+  width: min-content;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+.radio span input {
+  width: 2.3rem;
+}
+.addressdiv {
+  height: 3cm;
+}
+.addressdiv textarea {
+  border-radius: 10px;
+  border: solid rgb(204, 204, 204);
+  padding: 5px;
+  font-family: "Poppins", "sans-serif";
+  outline: none;
+  height: 100%;
+}
+
+.btn {
+  padding: 0.5rem;
+  width: 9rem;
+  font-weight: 300;
+  font-size: larger;
+  font-weight: bolder;
+  height: 3rem;
+  color: #fff;
+  margin-bottom: 2rem;
+  background-color: rgb(44, 44, 241);
+  outline: none;
+  border: none;
+  border: solid rgb(44, 44, 241);
+  border-radius: 0.5rem;
+}
+.btn:hover {
+  transition: all ease-out 0.2s;
+  border: solid rgb(44, 44, 241);
+  background-color: #fff;
+  color: rgb(44, 44, 241);
+}
+
+/*----overall dashboard ---*/
+.content-top-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.overall-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+
+.sidebar-container {
+  position: sticky;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  background-color: rgb(53, 44, 182);
+  height: 100vh;
+  padding-left: 0.3rem;
+  padding-right: 0.3rem;
+  display: flex;
+  width: 12rem;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  box-shadow: 0px 0px 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
+}
+/* top barr */
+.topbar-container {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6rem;
+  z-index: 1;
+  background-color: rgb(53, 44, 182);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 4rem;
+  padding-left: 4rem;
+}
+.student-profile-txt {
+  color: #ffff;
+  font-weight: 700;
+  font-size: 2rem;
+}
+.profile-name-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: bolder;
+  font-size: 1.5rem;
+  color: #ffff;
+  width: auto;
+  gap: 0.5rem;
+  height: 85%;
+}
+
+.profile-name-container .st-profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  border: 2px solid;
+  overflow: hidden;
+  width: 5rem;
+
+  border-radius: 50%;
+}
+.profile-name-container img {
+  width: 100%;
+  border: none;
+  outline: none;
+  object-fit: fill;
+}
+.topbarClose {
+  transition: all ease 0.3s;
+  width: 0;
+  height: 0;
+  padding: 0;
+}
+.topbar-container.topbarClose .profile-name-container {
+  opacity: 0;
+}
+.topbar-container.topbarClose .student-profile-txt {
+  opacity: 0;
+}
+
+/* side bar */
+.sidebar-container .header {
+  margin-top: 1.2rem;
+  height: 4rem;
+  background-color: rgba(0, 0, 0, 0.267);
+}
+.link-container {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 3rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-radius: 0.5rem;
+  color: #ffff;
+  gap: 1rem;
+}
+
+.link-container .link-text {
+  font-weight: 600;
+  pointer-events: none;
+  font-size: 1.2rem;
+}
+.logout {
+  display: flex;
+  width: 100%;
+  height: 2.5rem;
+  gap: 1rem;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 1.6rem;
+  border-radius: 0.5rem;
+  color: #ffff;
+}
+
+/* .dashboard,
+.edit,
+.export {
+  color: #ffff;
+} */
+.icon {
+  pointer-events: none;
+  font-size: 1.8rem;
+}
+.link-container:hover {
+  background-color: #ffff;
+  color: blue;
+}
+
+.active {
+  color: blue;
+  background-color: #ffff;
+}
+.close {
+  transition: width ease 0.5s;
+  width: 4rem;
+}
+
+/*  --------- profile css -------*/
+.profile-container {
+  display: flex;
+  height: 100%;
+  position: static;
+  align-items: center;
+  background-color: #7cf6ff;
+  justify-content: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+  color: rgb(77, 77, 77);
+}
+.profile-container section {
+  display: flex;
+  width: 100%;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.showdiv {
+  width: 20rem;
+  height: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+.showdiv label {
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+.showdiv input {
+  border: none;
+  outline: none;
+  width: 100%;
+  font-size: larger;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+  height: 4rem;
+}
+.textarea {
+  height: 7rem;
+}
+.textarea textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: larger;
+  border-radius: 0.5rem;
+  padding-left: 1rem;
+}
+.fg-container {
+  display: flex;
+  height: 2rem;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  padding-left: 8px;
+  font-weight: 400;
+  font-size: larger;
+}
+.fg-container .fg-show {
+  width: 1.5rem;
+}
+
+.sidebar-container.close .link-text {
+  opacity: 0;
+}
+/* ----Edit------*/
+.edit-submit-btn-con {
+  display: flex;
+  width: 50%;
+  gap: 2rem;
+  height: auto;
+  margin-bottom: 2rem;
+}
+.cancel {
+  background-color: var(--cancel-red);
+  border-color: var(--cancel-red);
+}
+.edit {
+  background-color: var(--edit-green);
+  border-color: var(--edit-green);
+}
+.cancel:hover {
+  border-color: var(--cancel-red);
+  background-color: #ffff;
+  color: var(--cancel-red);
+}
+.edit:hover {
+  border-color: var(--edit-green);
+  background-color: #ffff;
+  color: var(--edit-green);
+}
+/*------pdf-container-----*/
+.export-container {
+  background-color: #7cf6ff;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 2cm;
+  align-items: center;
+  gap: 2rem;
+  justify-content: center;
+}
+.preview-txt {
+  font-size: 1.7rem;
+  width: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px solid black;
+  font-weight: 700;
+}
+.pdf-container {
+  background-color: #fff;
+  width: 21cm;
+  height: 29.7cm;
+  padding: 1cm;
+  flex-shrink: 0;
+  z-index: 0;
+  box-shadow: 0 0 16px 8px rgba(0, 0, 0, 0.2);
+}
+
+.pdf-outline {
+  width: 100%;
+  height: 100%;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+.pdf-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid;
+}
+.tec-logo-outer {
+  width: 6rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.pdf-header .tec-txt {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+.tec-logo-outer img {
+  object-fit: cover;
+  pointer-events: none;
+}
+.pdf-st-profile {
+  width: 7rem;
+  height: 7rem;
+  display: flex;
+  position: absolute;
+  right: 3.5rem;
+  top: 3.5rem;
+  border: 1px solid black;
+}
+.info-container {
+  width: max-content;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.pdf-general-info {
+  position: relative;
+  width: 100%;
+  height: 6cm;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5rem;
+  margin-top: 0.8rem;
+  padding-left: 1.5rem;
+  padding-top: 1.5rem;
+}
+.info-content {
+  position: static;
+
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  line-height: 2.5rem;
+}
+.pdf-contact-info {
+  position: relative;
+  width: 100%;
+  height: 6cm;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5rem;
+  margin-top: 0.8rem;
+  padding-left: 1.5rem;
+  padding-top: 1.5rem;
+}
+.pdf-other-info {
+  position: relative;
+  width: 100%;
+  height: 6cm;
+  display: flex;
+  flex-direction: column;
+  padding-right: 5rem;
+  margin-top: 0.8rem;
+  padding-left: 1.5rem;
+  padding-top: 1.5rem;
+}
+.pdf-info-header {
+  position: absolute;
+  top: -0.4rem;
+  color: rgb(31, 30, 30);
+  font-weight: 500;
+  font-size: larger;
+  left: 0.2rem;
+  width: 99%;
+  padding-left: 4px;
+  border-bottom: 1px solid black;
+}
+.download-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--edit-green);
+  border-color: var(--edit-green);
+  gap: 2px;
+  width: 10rem;
+  height: 4rem;
+}
+.download-btn:hover {
+  border-color: var(--edit-green);
+  color: var(--edit-green);
+}
+.info-key {
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+.info-value {
+  font-weight: 400;
+  color: rgb(26, 26, 26);
+}
+.errorInputField {
+  border-color: #d93025;
+}

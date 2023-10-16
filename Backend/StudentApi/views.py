@@ -104,9 +104,13 @@ class login(APIView):
                 pass
         print('after check')
         student_log_serializer = StudentLoginSerializer(data=request.data)
+        print('after serial')
         if student_log_serializer.is_valid():
+            print('in if')
             student_log_serializer.save()
             return JsonResponse({"suc": "sucess"}, safe=False)
+        else:
+            print(student_log_serializer.errors)
 
     def put(self, request, userid, format=None):
         print(request.data)

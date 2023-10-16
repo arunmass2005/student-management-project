@@ -4,7 +4,7 @@ from django.db import models
 
 
 class StudentsModel(models.Model):
-    profile = models.ImageField(upload_to="students", default="frontend/src/assets/preview-profile.png")
+    profile = models.ImageField(upload_to="students",null=True)
     name = models.CharField(max_length=100)
     dob = models.DateField()
     gender = models.CharField(max_length=10)

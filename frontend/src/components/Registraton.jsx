@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useFieldError } from "./useError.js";
 import DropdownInput from "./DropdownInput.jsx";
-
+import {useNavigate} from "react-router-dom"
 function Registration() {
   const [bankDetails, setBankDetails] = useState({});
-  const [fieldsData, setFieldsData] = useState({});
+  const [dpId, setDpId] = useState("");
+  const navigate = useNavigate()
   async function handleBankDetails() {
     const ifsc = document.querySelector(".ifsc-input");
     const ifscApi = await fetch(`https://ifsc.razorpay.com/${ifsc.value}`, {
@@ -43,8 +44,11 @@ function Registration() {
       });
       const resp = await api.json();
 
-      if (resp.suc) alert(`${resp.suc} added successfully!`);
-      else {
+      if (resp.suc) {
+        alert(`${resp.suc} added successfully!`);
+        navigate('login',{replace:true})
+        
+      } else {
         console.log(resp);
         handleErrorField(resp.field, resp.err);
       }
@@ -149,16 +153,11 @@ function Registration() {
         </div>
         <div className="inputdiv">
           <label htmlFor="community-input">Community</label>
-          <DropdownInput field="community" />
+          <DropdownInput field="community" setDpId={setDpId} />
         </div>
         <div className="inputdiv">
           <label htmlFor="community-input">Caste</label>
-          <input
-            type="text"
-            className="caste-input input"
-            name="caste"
-            placeholder="Enter your caste"
-          />
+          <DropdownInput field="caste" id={dpId} parent="community" />
         </div>
         <div className="inputdiv">
           <label htmlFor="aadhar-input">Aadhar</label>
@@ -234,42 +233,20 @@ function Registration() {
         </div>
         <div className="inputdiv">
           <label htmlFor="country-input">Country</label>
-          <input
-            type="text"
-            className="country-input input"
-            name="country"
-            placeholder="Enter your country"
-            defaultValue={"India"}
-          />
+          <DropdownInput field="country" />
         </div>
         <div className="inputdiv">
           <label htmlFor="state-input">State</label>
-          <input
-            type="text"
-            className="state-input input"
-            name="state"
-            placeholder="Enter your State"
-            defaultValue={"Tamilnadu"}
-          />
+          <DropdownInput field="state" />
         </div>
 
         <div className="inputdiv">
           <label htmlFor="district-input">District</label>
-          <input
-            type="text"
-            className="district-input input"
-            name="district"
-            placeholder="Enter your district"
-          />
+          <DropdownInput field="district" setDpId={setDpId} />
         </div>
         <div className="inputdiv">
           <label htmlFor="taluk-input">Taluk</label>
-          <input
-            type="text"
-            className="taluk-input input"
-            name="taluk"
-            placeholder="Enter your taluk"
-          />
+          <DropdownInput field="taluk" id={dpId} parent="district" />
         </div>
         <div className="inputdiv">
           <label htmlFor="location-type-input">Location Type</label>

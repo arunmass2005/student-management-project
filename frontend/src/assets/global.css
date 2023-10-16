@@ -187,9 +187,8 @@ img:hover {
 .dropdown-container{
   position: absolute;
   background-color: #fff;
-  border: 1px solid black;
   width: 100%;
-  top: 5rem;
+  top: 5.25rem;
   border-radius: .5rem;
   height: 8rem;
   z-index: 3;

@@ -17,8 +17,8 @@ class lookupapiView(APIView):
         print(dbSerial)
         return dbSerial
 
-    def __filterGetData(self, model, serializer, id):
-        dbData = model.objects.filter(communityId=id)
+    def __filterGetData(self, model, serializer, idName,id):
+        dbData = model.objects.filter(**{f"{idName}":id})
         dbSerial = serializer(dbData, many=True)
         return dbSerial
 
@@ -99,11 +99,14 @@ class lookupapiView(APIView):
         else:
             print(Id)
             print("in else")
+            print(value)
             match value:
                 case "caste":
-                    f_data = self.__filterGetData(caste, casteSerializer, id)
+                    f_data = self.__filterGetData(caste, casteSerializer,"communityId", id)
+                    print(f_data.data)
                     return JsonResponse(f_data.data, safe=False)
 
                 case "taluk":
-                    f_data = self.__filterGetData(taluk, talukSerializer, id)
+                    f_data = self.__filterGetData(taluk, talukSerializer,"districtId", id)
+                    print(f_data.data)
                     return JsonResponse(f_data.data, safe=False)

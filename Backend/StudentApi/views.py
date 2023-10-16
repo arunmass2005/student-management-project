@@ -75,6 +75,7 @@ class login(APIView):
 
     def get(self, request, userid):
         student_log = StudentLoginModel.objects.get(userid=userid)
+        print(student_log)
         student_log_serializer = StudentLoginSerializer(student_log)
         return JsonResponse({"suc": student_log_serializer.data}, safe=False)
         # return JsonResponse({"err":[i for i in (student_log_serializer.errors).keys()]}, safe = False)
@@ -142,6 +143,7 @@ class loginCheck(APIView):
         # print(request.data["userid"])
         try:
             userid = StudentLoginModel.objects.get(userid=request.data["userid"])
+            print(userid)
             login_serial = StudentLoginSerializer(userid)
             if login_serial.data["password"] == request.data["password"]:
                 return JsonResponse({"suc": login_serial.data}, safe=False)

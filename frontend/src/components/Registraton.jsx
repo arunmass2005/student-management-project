@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
 import { useFieldError } from "./useError.js";
+import DropdownInput from "./DropdownInput.jsx";
 
 function Registration() {
   const [bankDetails, setBankDetails] = useState({});
+  const [fieldsData, setFieldsData] = useState({});
   async function handleBankDetails() {
     const ifsc = document.querySelector(".ifsc-input");
     const ifscApi = await fetch(`https://ifsc.razorpay.com/${ifsc.value}`, {
@@ -128,23 +130,11 @@ function Registration() {
         </div>
         <div className="inputdiv">
           <label htmlFor="gender-input ">Gender</label>
-          <select id="gender-input input" name="gender">
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+          <DropdownInput field="gender" />
         </div>
         <div className="inputdiv">
           <label htmlFor="blood-input">Blood Group</label>
-          <select id="blood-input input" name="bloodgroup">
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
+          <DropdownInput field="bloodgroup" />
         </div>
         <div className="inputdiv">
           <label htmlFor="nationality-input">Blood Group</label>
@@ -155,21 +145,11 @@ function Registration() {
         </div>
         <div className="inputdiv">
           <label htmlFor="religion-input">Religion</label>
-          <input
-            type="text"
-            className="religion-input input"
-            name="religion"
-            placeholder="Enter your religion"
-          />
+          <DropdownInput field="religion" />
         </div>
         <div className="inputdiv">
           <label htmlFor="community-input">Community</label>
-          <input
-            type="text"
-            className="community-input input"
-            name="community"
-            placeholder="Enter your community"
-          />
+          <DropdownInput field="community" />
         </div>
         <div className="inputdiv">
           <label htmlFor="community-input">Caste</label>

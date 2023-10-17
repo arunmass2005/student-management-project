@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useFieldError } from "./useError.js";
 import DropdownInput from "./DropdownInput.jsx";
-import {useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 function Registration() {
   const [bankDetails, setBankDetails] = useState({});
   const [dpId, setDpId] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   async function handleBankDetails() {
     const ifsc = document.querySelector(".ifsc-input");
     const ifscApi = await fetch(`https://ifsc.razorpay.com/${ifsc.value}`, {
@@ -46,8 +46,7 @@ function Registration() {
 
       if (resp.suc) {
         alert(`${resp.suc} added successfully!`);
-        navigate('login',{replace:true})
-        
+        navigate("login", { replace: true });
       } else {
         console.log(resp);
         handleErrorField(resp.field, resp.err);
@@ -75,6 +74,16 @@ function Registration() {
   var checked = (e) => {
     e.checked = true;
   };
+  function toggleEyes(e) {
+    const pInput = document.querySelector(".reg-p");
+    if (e.target.innerText == "visibility_off") {
+      pInput.type = "text";
+      e.target.innerText = "visibility";
+    } else {
+      pInput.type = "password";
+      e.target.innerText = "visibility_off";
+    }
+  }
   return (
     <form className="form-container" id="form" onSubmit={Submit}>
       <span id="title">REGISTRATION FORM</span>
@@ -82,6 +91,7 @@ function Registration() {
         <span className="profile_outer" onClick={profile}>
           <img src="src/assets/preview-profile.png" alt="" id="profile_img" />
           <input
+            autoComplete="off"
             type="file"
             className="profile_input"
             id="profile_input"
@@ -98,6 +108,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="name-input">Name</label>
           <input
+            autoComplete="off"
             type="text"
             className="name-input input"
             placeholder="Enter your name"
@@ -107,6 +118,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="user-input">UserId</label>
           <input
+            autoComplete="off"
             type="text"
             className="userid-input input"
             placeholder="Enter your userid"
@@ -122,15 +134,24 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="password-input">Password</label>
           <input
+            autoComplete="off"
             type="password"
-            className="password-input input"
+            className="password-input input reg-p"
             placeholder="Enter your password"
             name="password"
           />
+          <span class="material-symbols-outlined eye-icon" onClick={toggleEyes}>
+            visibility_off
+          </span>
         </div>
         <div className="inputdiv">
           <label htmlFor="dob-input">Date Of Birth</label>
-          <input type="date" className="dob-input input" name="dob" />
+          <input
+            autoComplete="off"
+            type="date"
+            className="dob-input input"
+            name="dob"
+          />
         </div>
         <div className="inputdiv">
           <label htmlFor="gender-input ">Gender</label>
@@ -141,11 +162,16 @@ function Registration() {
           <DropdownInput field="bloodgroup" />
         </div>
         <div className="inputdiv">
-          <label htmlFor="nationality-input">Blood Group</label>
-          <select id="nationality-input input" name="nationality">
-            <option value="Indian">Indian</option>
-            <option value="other">other</option>
-          </select>
+          <label htmlFor="nationality-input">Nationality</label>
+          <input
+            autoComplete="off"
+            type="text"
+            className="location-type-input input default"
+            name="location_type"
+            value={"Indian"}
+            readOnly
+            placeholder="Enter you nationlaity"
+          />
         </div>
         <div className="inputdiv">
           <label htmlFor="religion-input">Religion</label>
@@ -162,6 +188,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="aadhar-input">Aadhar</label>
           <input
+            autoComplete="off"
             type="text"
             className="aadhar-input input"
             name="aadhar"
@@ -177,32 +204,37 @@ function Registration() {
         </div>
         <div className="inputdiv radio">
           <label htmlFor="fg-input">First Graduate</label>
-          <span>
-            <span>
+          <div className="radio-container">
+            <div className="radio-outer">
               <input
+                className="radio-input"
+                autoComplete="off"
                 type="radio"
                 name="firstgraduate"
                 value={"yes"}
                 onClick={checked}
               />{" "}
               yes
-            </span>
-            <span>
+            </div>
+            <div className="radio-outer">
               <input
+                className="radio-input"
+                autoComplete="off"
                 type="radio"
                 name="firstgraduate"
                 value={"no"}
                 onClick={checked}
               />{" "}
               no
-            </span>
-          </span>
+            </div>
+          </div>
         </div>
       </section>
       <section className="Contact-Info">
         <div className="inputdiv">
           <label htmlFor="mobile-input">Mobile Number</label>
           <input
+            autoComplete="off"
             type="text"
             className="mobile-input input"
             name="mobile"
@@ -219,6 +251,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="emailid-input">Email Id</label>
           <input
+            autoComplete="off"
             type="email"
             className="emailid-input input"
             name="emailid"
@@ -251,6 +284,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="location-type-input">Location Type</label>
           <input
+            autoComplete="off"
             type="text"
             className="location-type-input input"
             name="location_type"
@@ -261,6 +295,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="vilage-input">Vilage/Town</label>
           <input
+            autoComplete="off"
             type="text"
             className="vilage-input input"
             name="place"
@@ -280,6 +315,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="father-name-input">Father Name</label>
           <input
+            autoComplete="off"
             type="text"
             className="father-name-input input"
             name="fathersname"
@@ -289,6 +325,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="f-occupation-input">Father Occupation</label>
           <input
+            autoComplete="off"
             type="text"
             className="f-occupation-input input"
             name="fathersoccupation"
@@ -298,6 +335,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="mother-name-input">Mother Name</label>
           <input
+            autoComplete="off"
             type="text"
             className="mother-name-input input"
             name="mothersname"
@@ -307,6 +345,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="m-occupation-input">Mothers Occupation</label>
           <input
+            autoComplete="off"
             type="text"
             className="m-occupation-input input"
             name="mothersoccupation"
@@ -316,6 +355,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="parents-mobile-input">Parent Mobile Number</label>
           <input
+            autoComplete="off"
             type="text"
             className="parents-mobile-input input"
             name="parents_mobile_number"
@@ -325,6 +365,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="a-income-input">Annual Income</label>
           <input
+            autoComplete="off"
             type="text"
             className="a-income-input input"
             name="annual_income"
@@ -336,27 +377,37 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="account-input">Account Number</label>
           <input
+            autoComplete="off"
             type="text"
             className="account-input input"
             name="account_number"
             placeholder="account number"
           />
         </div>
-        <div className="inputdiv">
-          <label htmlFor="ifsc-input">IFSC code</label>
-          <input
-            type="text"
-            className="ifsc-input input"
-            name="ifsc"
-            placeholder="ifsc code"
-          />
+        <div className="ifsc-container">
+          <div className="inputdiv">
+            <label htmlFor="ifsc-input">IFSC code</label>
+            <input
+              autoComplete="off"
+              type="text"
+              className="ifsc-input input"
+              name="ifsc"
+              placeholder="ifsc code"
+            />
+          </div>
+
+          <button
+            type="button"
+            className="btn edit register-btn"
+            onClick={handleBankDetails}
+          >
+            Get Data
+          </button>
         </div>
-        <button type="button" className="btn edit" onClick={handleBankDetails}>
-          Get Data
-        </button>
         <div className="inputdiv">
           <label htmlFor="b-name-input">Bank Name</label>
           <input
+            autoComplete="off"
             type="text"
             className="b-name-input input"
             name="b-name"
@@ -368,6 +419,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="b-branch-input">Bank Branch</label>
           <input
+            autoComplete="off"
             type="text"
             className="b-branch-input input"
             name="b-branch"
@@ -379,6 +431,7 @@ function Registration() {
         <div className="inputdiv">
           <label htmlFor="b-city-input">City</label>
           <input
+            autoComplete="off"
             readOnly
             type="text"
             className="b-city-input input"

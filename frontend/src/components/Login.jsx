@@ -37,6 +37,16 @@ export default () => {
     const logindata = new FormData(form);
     check(logindata);
   }
+  function toggleEyes(e) {
+    const pInput = document.querySelector(".log-p");
+    if (e.target.innerText == "visibility_off") {
+      pInput.type = "text";
+      e.target.innerText = "visibility";
+    } else {
+      pInput.type = "password";
+      e.target.innerText = "visibility_off";
+    }
+  }
   return (
     <>
     <div className="login-fullpage-container">
@@ -70,7 +80,7 @@ export default () => {
           </span>
           <input
             type="password"
-            className="input-password"
+            className="input-password log-p"
             placeholder="PASSWORD"
             name="password"
             id="password"
@@ -79,6 +89,9 @@ export default () => {
             }}
             required
           />
+          <span class="material-symbols-outlined eye-icon" onClick={toggleEyes}>
+            visibility_off
+          </span>
           <span className="errormsg" id="password-errormsg">
             <span className="material-symbols-outlined">error</span>
             <span>Incorrect Password</span>

@@ -56,10 +56,12 @@ function DropdownInput({ field, id, setDpId, parent }) {
       <input
         type="text"
         className="input"
+        placeholder={`Enter your ${field}`}
         onClick={handleClick}
         onChange={handleChange}
         value={inData}
         name ={field}
+        autoComplete="off"
         // onBlur={close}
       />
       <span

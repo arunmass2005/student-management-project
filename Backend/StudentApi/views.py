@@ -1,5 +1,5 @@
 from rest_framework.response import Response
-from django.http import JsonResponse
+from django.http import JsonResponse,FileResponse
 from rest_framework.views import APIView
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from .messages import message
@@ -25,7 +25,7 @@ class ApiViews(APIView):
         elif field == "image":
             student = StudentsModel.objects.get(id=id)
             return JsonResponse(
-                {"url": f"http://localhost:8000/students/images/{student.profile}"},
+                {"url": f"http://localhost:8000.ngrok-free.app/students/images/{student.profile}"},
                 safe=False,
             )
         else:
@@ -46,28 +46,38 @@ class ApiViews(APIView):
 
     def put(self, request, MobileNum, format=None):
         student = StudentsModel.objects.get(mobile=MobileNum)
+        print(student.profile)
+        if student.profile:
+            print(student.profile)
+            if request.data.profile:
+                os.remove(f"{settings.BASE_DIR}/images/{student.profile}")
+            elif request.data == {}:
+                return JsonResponse({"suc": "No updates found"}, safe=False)
+        else:
+            student_serializer = StudentsSerializer(
+                student, data=request.data, partial=True
+            )
+            if student_serializer.is_valid():
+                student_serializer.save()
+                return JsonResponse({"suc": "Successfully updated"}, safe=False)
+            print(student_serializer.errors)
+            return JsonResponse(
+                {"err": [i for i in (student_serializer.errors).keys()]}, safe=False
+            )
 
-        if request.data.profile:
-            os.remove(f"{settings.BASE_DIR}/images/{student.profile}")
-        elif request.data == {}:
-            return JsonResponse({"suc": "No updates found"}, safe=False)
-
-        student_serializer = StudentsSerializer(
-            student, data=request.data, partial=True
-        )
-        if student_serializer.is_valid():
-            student_serializer.save()
-            return JsonResponse({"suc": "Successfully updated"}, safe=False)
-        print(student_serializer.errors)
-        return JsonResponse(
-            {"err": [i for i in (student_serializer.errors).keys()]}, safe=False
-        )
-
-    def delete(self, request, MobileNum, *agrs, **kwargs):
-        student = StudentsModel.objects.get(mobile=MobileNum)
-        os.remove(f"{settings.BASE_DIR}/images/{student.profile}")
-        student.delete()
-        return JsonResponse(message(student.name, "Deleted Successfully"))
+    def delete(self, request, mobile, *agrs, **kwargs):
+        print(mobile)
+        try:
+            student = StudentsModel.objects.get(mobile=mobile)
+            try:
+                os.remove(f"{settings.BASE_DIR}/images/{student.profile}")
+                os.remove(f"{settings.BASE_DIR}/st_pdfs/{student.name}.pdf")
+            except Exception as e:
+                print("error caused ",e)
+            student.delete()
+            return JsonResponse({"suc":{"msg":f"{student.name} Deleted Successfully"}},safe = False)
+        except StudentsModel.DoesNotExist:
+            return JsonResponse({"not_exist":"aldready deleted"},safe = False)
 
 
 class login(APIView):
@@ -113,19 +123,19 @@ class login(APIView):
             print(student_log_serializer.errors)
 
     def put(self, request, userid, format=None):
+        print("in login data")
         print(request.data)
         if request.data == {}:
-            return JsonResponse({"err": "No chnages detected"}, safe=False)
+            return JsonResponse({"err": "No changes detected"}, safe=False)
         student = StudentLoginModel.objects.get(userid=userid)
         print("profile" in request.data)
         if "profile" in request.data:
             request_profile = request.data["profile"]
             if request_profile == "preview-profile.png":
                 request.data.pop("profile")
-            elif request_profile != str(student.profile).split("/")[-1]:
+            elif (request_profile != str(student.profile).split("/")[-1]) and student.profile:
                 os.remove(f"{settings.BASE_DIR}/images/{student.profile}")
-            else:
-                request.data.pop("profile")
+
         student_serializer = StudentLoginSerializer(
             student, data=request.data, partial=True
         )
@@ -138,7 +148,13 @@ class login(APIView):
             {"err": [i for i in (student_serializer.errors).keys()]}, safe=False
         )
 
-
+    def delete(self, request, userid, *agrs, **kwargs):
+        print("in userid")
+        print(userid)
+        student = StudentsModel.objects.get(userid=userid)
+        # os.remove(f"{settings.BASE_DIR}/images/{student.profile}")
+        student.delete()
+        return JsonResponse(message(student.name, "Deleted Successfully"))
 class loginCheck(APIView):
     parser_classes = MultiPartParser, FormParser, JSONParser
 
@@ -161,11 +177,32 @@ class generatePdfView(APIView):
     parser_classes = MultiPartParser, FormParser, JSONParser
     print("in api")
 
-    def post(self, request, id):
-        print(id)
-        student_model = StudentsModel.objects.get(id=id)
-        print(student_model)
-        student_serializer = StudentsSerializer(student_model)
-        print(student_serializer.data)
-        generatePdf(student_serializer.data)
-        return JsonResponse({"suc": "fuck"}, safe=False)
+    def post(self, request):
+        stDataDict = {key:value for key,value in request.data.items()}
+        file_path = generatePdf(stDataDict)
+        # f_response = FileResponse(open(file_path,"rb"),content_type = "application/pdf",as_attachment = True)
+        # # f_response["Content-Disposition"] = f'attachment; filename={file_path}'
+        print(file_path.split("/")[-1])
+        return JsonResponse({"suc": (file_path.split("/")[-1])}, safe=False)
+
+class checkStDetailsExists(APIView):
+    parser_classes = MultiPartParser, FormParser, JSONParser
+
+    def post(self,request):
+        print(request.data)
+        fields = request.data["fields"].split(",")
+        req_data = {k:v for k,v in request.data.items()}
+        print(req_data)
+        temp = []
+        for f in fields:
+            print(f)
+            try:
+                print("in try")
+                if StudentLoginModel.objects.get(**{f: req_data[f]}):
+                    temp.append({"field":f,"value":req_data[f]})
+            except StudentLoginModel.DoesNotExist:
+                pass
+        if temp:
+            return JsonResponse({"err":temp},safe = False)
+        else:
+            return JsonResponse({"suc":"no errors"},safe = False)

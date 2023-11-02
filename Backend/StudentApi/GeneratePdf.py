@@ -47,7 +47,7 @@ BACK_ACCOUNT_DETAILS = [
             "CITY",
         ]
     # {'PAST ACCADEMIC INFORMATION':[]}
-def writeData(c,key,data):
+def writeData(c,key,data,right=False):
 
     global init_x
     global init_y
@@ -56,16 +56,24 @@ def writeData(c,key,data):
     c.setFillColorCMYK(0.5, 0.5, 0.5, 0.5)
     c.drawString((init_x + 0.5) * cm, (init_y) * cm, f"{key} : ")
     c.restoreState()
-    c.setFont("Poppins-SemiBold", 11)
-    c.drawString(
-        (c.stringWidth(f"{key} : ", "Helvetica-Bold", 12) + (1 * cm)),
-        (init_y) * cm,
-        data,
-    )
+    c.setFont("Poppins-Regular", 11)
+    if right!=True :
+        c.drawString(
+            (c.stringWidth(f"{key} : ", "Helvetica-Bold", 12) + (1 * cm)),
+            (init_y) * cm,
+            data,
+        )
+    else:
+        c.drawString(
+            (c.stringWidth(f"{key} : ", "Helvetica-Bold", 12) + (1 * cm)+(init_x *cm)),
+            (init_y) * cm,
+            data,
+        )
     init_y -= 0.7
 
 def generatePdf(data):
     print(data['name'])
+    print(data)
     global init_x
     global init_y
     pdfmetrics.registerFont(
@@ -87,7 +95,7 @@ def generatePdf(data):
         )
     )
     # create canva for pdf
-    c = canvas.Canvas("new.pdf", pagesize=A4)
+    c = canvas.Canvas(f"{settings.BASE_DIR}/st_pdfs/{data['name']}.pdf" ,pagesize=A4)
     c.translate(cm, cm)
     print(cm)
     w, h = 21, 29.1
@@ -128,7 +136,8 @@ def generatePdf(data):
     writeData(c,"DATE OF BIRTH",data['dob'])
     writeData(c,"GENDER",data['gender'])
     writeData(c,"BLOOD GROUP",data['bloodgroup'])
-    writeData(c,"NATIONALITY",data['nationality'])
+    if data['nationality']=='null':
+        writeData(c,"NATIONALITY","INDIAN")
     writeData(c,"RELIGION",data['religion'])
     writeData(c,"COMMUNITY",data['community'])
     writeData(c,"CASTE",data['caste'])
@@ -152,6 +161,7 @@ def generatePdf(data):
     writeData(c,"TALUK",data['taluk'])
     writeData(c,"PLACE",data['place'])
     writeData(c,"ADDRESS",data['address'])
+    writeData(c,"PINCODE",data['pincode'])
     init_y+=0.3
     #----info title -----
     c.line(0 * cm, (init_y) * cm, 19 * cm, (init_y) * cm)
@@ -183,10 +193,17 @@ def generatePdf(data):
     init_y -= 0.3
     c.line(0 * cm, (init_y) * cm, 19 * cm, (init_y) * cm)
     init_y -= 0.5
+    print(init_y,init_x)
     writeData(c,"ACCOUNT NUMBER",data['account_number'])
     writeData(c,"IFSC CODE",data['ifsc'])
+    writeData(c,"BANK NAME",data['bank_name'])
+    writeData(c,"BRANCH",data['bank_branch'])
+    init_y = 2.500000000000015
+    init_x = 9
+    writeData(c,"CITY",data['city'],True)
     init_y = 25.8
     init_x = 0.5
     c.showPage()
     c.save()
-    return
+    
+    return f"{settings.BASE_DIR}/st_pdfs/{data['name']}.pdf"

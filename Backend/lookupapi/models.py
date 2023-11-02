@@ -61,3 +61,7 @@ class taluk(models.Model):
     districtId = models.PositiveSmallIntegerField()
     def __str__(self):
         return self.value
+class location_type(models.Model):
+    value = models.CharField(max_length=50)
+    def __str__(self):
+        return self.value

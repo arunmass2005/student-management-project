@@ -42,4 +42,7 @@ class talukSerializer(serializers.ModelSerializer):
     class Meta:
         model = taluk
         fields = "__all__"
-        
+class location_typeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = location_type
+        fields = "__all__"

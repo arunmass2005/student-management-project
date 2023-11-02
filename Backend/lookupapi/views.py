@@ -64,6 +64,9 @@ class lookupapiView(APIView):
                 case "taluk":
                     f_data = self.__getData(taluk, talukSerializer)
                     return JsonResponse(f_data.data, safe=False)
+                case "location_type":
+                    f_data = self.__getData(location_type, location_typeSerializer)
+                    return JsonResponse(f_data.data, safe=False)
 
         elif Id != None and id == None:
             print("in elif case")
@@ -94,6 +97,9 @@ class lookupapiView(APIView):
                     return JsonResponse(f_data.data, safe=False)
                 case "taluk":
                     f_data = self.__getSpecData(taluk, talukSerializer, Id)
+                    return JsonResponse(f_data.data, safe=False)
+                case "location_type":
+                    f_data = self.__getSpecData(location_type, location_typeSerializer, Id)
                     return JsonResponse(f_data.data, safe=False)
 
         else:

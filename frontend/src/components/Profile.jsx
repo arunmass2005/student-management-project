@@ -43,7 +43,7 @@ function Profile() {
             {/* <div className="profile" id="profilediv">
           <span className="profile_outer">
             <img
-              src={`http://192.168.216.65:8000/students${stData.profile}`}
+              src={`http://localhost:8000/students${stData.profile}`}
               alt=""
               id="profile_img"
             />

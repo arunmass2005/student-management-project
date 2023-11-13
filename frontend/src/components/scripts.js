@@ -35,7 +35,7 @@ async function setFromApi(fields, stData, setState) {
   for (const field of fields) {
     console.log("before access api");
     const resp = await axios.get(
-      `http://192.168.216.65:8000/api/lookup/${field}/${stData[field]}`
+      `http://localhost:8000/api/lookup/${field}/${stData[field]}`
     );
     stData[field] = resp.data.value;
   }
@@ -52,23 +52,22 @@ function objTOform(obj) {
   });
   return formData;
 }
-function createErrNode(errmsg, field) {
+function createErrNode(errmsg, field, green) {
   const errNode = document.createElement("div");
 
   if (document.querySelector(`.${field}-errorField`)) {
     document.querySelector(`.${field}-errorField`).remove();
     errNode.className = `${field}-errorField`;
-    errNode.classList.add("errorFieldMsg");
+    errNode.classList.add(green ? "greenFieldMsg" : "errorFieldMsg");
     errNode.innerText = `${errmsg}*`;
   } else {
     errNode.className = `${field}-errorField`;
-    errNode.classList.add("errorFieldMsg");
+    errNode.classList.add(green ? "greenFieldMsg" : "errorFieldMsg");
     errNode.innerText = `${errmsg}*`;
   }
   return errNode;
 }
 function handleErrorField(field, errmsg, spec) {
-  console.log(`.${field}-input`);
   const errField = document.querySelector(spec ? field : `.${field}-input`);
   window.scrollTo(errField.getBoundingClientRect());
   errField.classList.add("errorInputField");
@@ -84,13 +83,13 @@ function checkEmpty(form) {
   formInputs.forEach((ip) => {
     console.log(ip.hasAttribute("defaultValue"));
     if (ip.hasAttribute("required")) {
-      console.log("yse its has required");
       console.log(ip.defaultValue);
-      if (ip.value == ""){
-      temp.push({
-        tagName: ip.tagName,
-        ipName: ip.name,
-      })}
+      if (ip.value == "") {
+        temp.push({
+          tagName: ip.tagName,
+          ipName: ip.name,
+        });
+      }
     }
   });
   if (temp.length > 1) {
@@ -105,6 +104,12 @@ function checkEmpty(form) {
     return true;
   } else return false;
 }
+function removeErrorInput(e) {
+  document.querySelector(`.${e.target.name}-errorField`)
+    ? document.querySelector(`.${e.target.name}-errorField`).remove()
+    : null;
+  e.target.classList.remove("errorInputField");
+}
 
 export {
   closeSidebar,
@@ -117,4 +122,5 @@ export {
   handleErrorField,
   createErrNode,
   checkEmpty,
+  removeErrorInput,
 };

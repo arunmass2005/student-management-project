@@ -14,7 +14,7 @@ function Export() {
   }, []);
 
   async function generatePdfApi(data) {
-    const api = await fetch(`http://192.168.216.65:8000/students/generatePdf`, {
+    const api = await fetch(`http://localhost:8000/students/generatePdf`, {
       method: "Post",
       body: objTOform(data ? data : stData),
     });
@@ -59,13 +59,14 @@ function Export() {
     // saveAs(pdf,"TECIS-GENERATED.pdf")
     // const pdfUrl = window.URL.createObjectURL(pdf)
     const tempLink = document.createElement("a");
-    tempLink.href = `http://192.168.216.65:8000/students/st_pdfs/${pdf}`;
+    tempLink.href = `http://localhost:8000/students/static/st_pdfs/${pdf}`;
     // tempLink.target = "_blank"
     tempLink.download = "TECIS_GENERATED.pdf";
     document.body.appendChild(tempLink);
     tempLink.click();
     // window.URL.revokeObjectURL(tempLink.href)
   }
+
   return (
     <>
       {stData && pdf ? (
@@ -88,7 +89,7 @@ function Export() {
                 <span className="pdf-info-header">GENERAL INFORMATIONS</span>
                 <span className="pdf-st-profile">
                   <img
-                    src={`http://192.168.216.65:8000/students${stData.profile}`}
+                    src={`http://localhost:8000/students${stData.profile}`}
                     alt=""
                   />
                 </span>
@@ -233,11 +234,11 @@ function Export() {
             </div>
           </div> */}
           {/* <frame className="pdfIframe"
-            data={`http://192.168.216.65:8000/students/st_pdfs/${pdf}`}
+            data={`http://localhost:8000/students/st_pdfs/${pdf}`}
 
             type="application/pdf"
           ></frame> */}
-          {/* <Document file={"http://192.168.216.65:8000/students/st_pdfs/a.pdf"}>
+          {/* <Document file={"http://localhost:8000/students/st_pdfs/a.pdf"}>
             <Page pageNumber={1} />
           </Document> */}
           {/* <object ></object> */}

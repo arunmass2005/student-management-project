@@ -1,10 +1,11 @@
 from django.urls import path
-from .views import ApiViews, login, loginCheck, generatePdfView,checkStDetailsExists
+from .views import *
 from django.conf.urls.static import static
 from django.conf import settings
-
+print("in student urls")
 urlpatterns = [
     path("", ApiViews.as_view()),
+    path("initOtp/<str:emailid>",SendOtp.as_view()),
     path("<int:id>", ApiViews.as_view()),
     path("delete/<str:mobile>",ApiViews.as_view()),
     path("login/", login.as_view()),
@@ -13,4 +14,5 @@ urlpatterns = [
     path("login/<str:userid>", login.as_view()),
     path("generatePdf", generatePdfView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns +=static(settings.STATIC_URL,document_root = settings.STATIC_ROOT)
+urlpatterns +=static(settings.STATIC_URL,document_root = settings.STATICFILES_DIRS)
+print("after student urls")

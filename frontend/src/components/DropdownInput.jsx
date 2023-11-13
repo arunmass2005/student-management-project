@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Select from "react-select";
-import axios from "axios";
+
 function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
   console.log(id);
   const [data, setData] = useState([]);
@@ -8,27 +7,32 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
   const [inData, setInData] = useState(data);
   useEffect(() => {
     async function getData() {
-      if (id)
-        var resp = await axios.get(
-          `http://192.168.216.65:8000/api/lookup/${field}/get/${id}`
-        );
-      else
-        var resp = await axios.get(
-          `http://192.168.216.65:8000/api/lookup/${field}`
-        );
+      if (parent && id) {
+        if (id) {
+          var api = await fetch(
+            `http://localhost:8000/api/lookup/${field}/get/${id}`
+          );
+          let resp = await api.json();
+          setData(resp);
+          setFiltData(resp);
+        }
+      } else {
+        const api = await fetch(`http://localhost:8000/api/lookup/${field}`);
+        let resp = await api.json();
 
-      setData(resp.data);
-      setFiltData(resp.data);
+        setData(resp);
+        setFiltData(resp);
+      }
     }
     getData();
     console.log(id);
   }, [id ? id : null, field]);
   function handleOutsideClick(e) {
-    const thisIpTagName = e.target.name
+    const thisIpTagName = e.target.name;
     // thisIpTagName == "SECTION" ? close() : null;
     // thisIpTagName== "FORM" ? close() : null;
     // thisIpTagName == "form-container" ? close() : null;
-    thisIpTagName!== field?close():null
+    thisIpTagName !== field ? close() : null;
   }
   function handleClick() {
     const dp = document.getElementById(`${field}`);
@@ -52,7 +56,10 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
   }
   function filterData(value) {
     const a = data.filter((arry) => {
-      return arry.value.toLowerCase().startsWith(value.toLowerCase()) && arry.value.toLowerCase().includes(value.toLowerCase()) ? true : false;
+      return arry.value.toLowerCase().startsWith(value.toLowerCase()) &&
+        arry.value.toLowerCase().includes(value.toLowerCase())
+        ? true
+        : false;
     });
     setFiltData(a);
   }
@@ -93,18 +100,33 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
       <div className="fullScreen-dp">
         {filtData ? (
           <div className="dropdown-container" id={`${field}`}>
-            {filtData.map((arry) => (
-              <div
-                className="dp-elements"
-                key={arry.id}
-                onBlur={close}
-                onClick={() => {
-                  handleElementClick(arry);
-                }}
-              >
-                {arry.value}
-              </div>
-            ))}
+            {parent && id
+              ? filtData.map((arry) => (
+                  <div
+                    className="dp-elements"
+                    key={arry.id}
+                    onBlur={close}
+                    onClick={() => {
+                      handleElementClick(arry);
+                    }}
+                  >
+                    {arry.value}
+                  </div>
+                ))
+              : parent
+              ? null
+              : filtData.map((arry) => (
+                  <div
+                    className="dp-elements"
+                    key={arry.id}
+                    onBlur={close}
+                    onClick={() => {
+                      handleElementClick(arry);
+                    }}
+                  >
+                    {arry.value}
+                  </div>
+                ))}
           </div>
         ) : null}
       </div>

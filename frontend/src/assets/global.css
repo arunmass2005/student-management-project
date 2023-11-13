@@ -11,7 +11,146 @@
   --edit-green: rgb(0, 206, 0);
   --cancel-red: rgb(255, 51, 0);
 }
+/* re useable  */
+.flex-center-col {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2px;
+}
+.login-link {
+  text-decoration: underline;
+  font-weight: 500;
+  word-spacing: 1px;
+  letter-spacing: 1px;
+}
+.login-link:hover {
+  color: #d93025;
+}
+/* forgot  */
+.forgot-ctn {
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1rem;
+}
+.fgt-header {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.fgt-btns {
+  height: 15rem;
+  width: 15rem;
+  gap: 1.5rem;
+}
+/* forgot popup */
+.fgt-bg-blur-ctn {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(2px);
+  position: absolute;
+}
+.fgt-popup {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 80%;
+  height: auto;
+  padding: 1rem 0 1rem 0;
+  gap: 1rem;
+  box-shadow: 0px 0px 14px 6px rgba(0, 0, 0, 0.2);
+  background-color: #fdfdfd;
+  z-index: 4;
+}
+.fgt-popup .inputdiv {
+  width: 80%;
+}
+.fgt-popup-header {
+  position: absolute;
+  top: 1rem;
+  font-size: larger;
+  font-weight: 400;
+  width: 100%;
+  text-align: center;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  height: 2rem;
+  font-weight: 500;
+}
+.fgt-close {
+  position: absolute;
+  top: -3rem;
+  right: 0;
+  font-size: 2rem;
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  background-color: #e6e6e6;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+.suc-border {
+  border-color: var(--edit-green) !important;
+}
+.closed {
+  pointer-events: none;
+  opacity: 0.4;
+}
+/* view popup */
+.view-popup-ctn {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
+  flex-direction: column;
+}
+.view-key {
+  font-size: larger;
+  font-weight: 700;
+}
+.view-value {
+  font-size: 1.4rem;
+  background-color: rgb(116, 116, 116);
+  color: #ffffff;
+  padding: 4px 8px;
+}
+/* reset popup */
+.fgt-reset-ctn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-evenly;
+  height: auto;
+  gap: 1rem;
+  padding: 4rem 0rem 2rem 0px;
+}
+.fgt-reset-header {
+  position: absolute;
+  top: 0.5rem;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500;
+  width: auto;
+  padding: 0.5rem;
+  border-radius: 4px;
+  background-color: var(--cancel-red);
+  color: #e6e6e6;
+}
 /*----overall dashboard ---*/
 .overall-container {
   width: 100%;
@@ -39,7 +178,7 @@
   z-index: 5;
   box-shadow: 0px 0px 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
 }
-.delete{
+.delete {
   background-color: #d93025;
 }
 .link-container {
@@ -47,8 +186,8 @@
   align-items: center;
   width: 100%;
   height: 3rem;
-  padding-left: .9rem;
-  padding-right: .9rem;
+  padding-left: 0.9rem;
+  padding-right: 0.9rem;
   border-radius: 0.5rem;
   color: #ffff;
   gap: 1rem;
@@ -90,12 +229,15 @@
   width: calc(100% - 4rem);
   overflow-y: scroll;
 }
-div:focus{
+div:focus {
   outline: none;
 }
 .main-content-close {
   left: 12rem;
   width: calc(100% - 12rem);
+}
+.ifsc-input {
+  text-transform: capitalize !important;
 }
 /* .sidebar-container.close .topbar-container {
   left: 4rem;
@@ -114,9 +256,9 @@ div:focus{
   justify-content: space-between;
   padding: 0.7rem 0.7rem;
 }
-.pdfIframe{
-  width:100%;
-  height:1000px;
+.pdfIframe {
+  width: 100%;
+  height: 1000px;
 }
 .student-profile-txt {
   color: #ffffff;
@@ -143,8 +285,16 @@ div:focus{
   border: 2px solid;
   overflow: hidden;
   width: 4rem;
-
   border-radius: 50%;
+}
+.profile-name-container .st-name{
+  color: #000000;
+  background-color: #ffffff;
+  padding: 2px 4px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: .8rem;
+  box-shadow: 0px 0px 2px 4px rgba(0, 0, 0, 0.1),0px 0px 2px 4px rgba(0, 0, 0, 0.1),0px 0px 2px 4px rgba(0, 0, 0, 0.1),0px 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 .profile-name-container img {
   width: 100%;
@@ -340,7 +490,7 @@ div:focus{
 /*------pdf-container-----*/
 .export-container {
   background-color: #7cf6ff;
-  
+
   width: 100%;
   min-height: 100vh;
   height: 100%;
@@ -757,14 +907,20 @@ section {
   background-color: #ffff;
   border: 1px solid grey;
   right: -15rem;
-  z-index: 1;
+  z-index: 4;
   display: none;
   flex-direction: column;
   align-items: left;
   justify-content: center;
   top: 2rem;
 }
+.warning {
+  font-size: 1.4rem;
+  color: #d93025;
+}
 .req-ul-head {
+  display: flex;
+  align-items: center;
   color: #000;
   margin-left: 0.7rem;
   top: 0.5rem;
@@ -871,28 +1027,31 @@ img:hover {
   width: 100%;
   top: 5.25rem;
   border-radius: 0.5rem;
-  height: 10rem;
-  z-index: 10;
+  height: 11rem;
+  z-index: 1;
   display: none;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 1px;
+  padding-top: 0.5rem;
+  gap: 0.5rem;
   overflow-y: scroll;
-  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 2px 2px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 2px rgba(0, 0, 0, 0.1), 0px 1px 2px 2px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 2px rgba(0, 0, 0, 0.2);
   transition: all ease 1s;
 }
 .dp-elements {
   width: 100%;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
   font-weight: 400;
-  font-size: larger;
-  color: rgb(54, 54, 54);
+  font-size: large;
+  color: #636363;
   background-color: #d6d6d654;
-  padding: 2px 0px;
+  padding: 4px 0px;
+  height: 2rem;
   padding-left: 1rem;
   cursor: pointer;
 }
@@ -933,6 +1092,15 @@ select:hover {
   display: flex;
   font-size: small;
   color: #d93025;
+}
+.greenFieldMsg {
+  transition: all ease-in-out 0.1s !important;
+  position: absolute;
+  bottom: -0.5cm;
+  height: 20px;
+  display: flex;
+  font-size: small;
+  color: green;
 }
 select {
   outline: none;
@@ -981,8 +1149,8 @@ select option {
 .addressdiv {
   height: 3cm;
 }
-.address-input{
-  border: 2px solid #2c2cf1!important;
+.address-input {
+  border: 2px solid #2c2cf1 !important;
 }
 .addressdiv textarea {
   border-radius: 10px;
@@ -1003,7 +1171,10 @@ select option {
   justify-content: space-around;
 }
 .btn {
-  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.6rem 1rem;
   width: 9rem;
   font-weight: 300;
   font-size: larger;
@@ -1045,7 +1216,7 @@ select option {
 @media screen and (max-width: 480px) {
   .student-profile-txt {
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
   }
   .topbar-container {
     height: 4.5rem;
@@ -1055,6 +1226,7 @@ select option {
     width: 4rem;
     height: 4rem;
   }
+
   .profile-name-container img {
     width: 100%;
     border: none;
@@ -1095,122 +1267,5 @@ select option {
     font-size: 1.7rem;
     font-weight: 400;
     font-family: sans-serif;
-  }
-  .pdfIframe{
-    width:350px;
-    height:500px;
-  }
-  .pdf-container {
-    width: 9cm;
-    height: 12.7278cm;
-    flex-shrink: inherit;
-    padding-top: 0;
-    padding: 0px 1.5rem;
-    position: relative !important;
-  }
-
-  .pdf-outline {
-    width: 100%;
-    height: 100%;
-    border: 1px solid black;
-    border-top: none;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-  }
-  .pdf-outline img:hover {
-    opacity: 1;
-  }
-  .pdf-header {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-bottom: 1px solid;
-  }
-  .tec-logo-outer {
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .pdf-header .tec-txt {
-    font-size: 0.8rem;
-    font-weight: 600;
-  }
-  .tec-logo-outer img {
-    object-fit: cover;
-    pointer-events: none;
-  }
-  .pdf-st-profile {
-    width: 1.5cm;
-    height: 1.928cm;
-    display: flex;
-    position: absolute;
-    right: calc(1.2857cm - 1.5rem);
-    top: 3.5rem;
-    border: 1px solid black;
-  }
-  .info-container {
-    width: max-content;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .pdf-general-info {
-    position: relative;
-    width: 100%;
-    height: 6cm;
-    display: flex;
-    flex-direction: column;
-    padding-right: 5rem;
-    margin-top: 0.8rem;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
-  }
-  .info-content {
-    position: static;
-
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    line-height: 1rem;
-  }
-  .pdf-contact-info {
-    position: relative;
-    width: 100%;
-    height: 6cm;
-    display: flex;
-    flex-direction: column;
-    padding-right: 5rem;
-    margin-top: 0.8rem;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
-  }
-  .pdf-other-info {
-    position: relative;
-    width: 100%;
-    height: 6cm;
-    display: flex;
-    flex-direction: column;
-    padding-right: 5rem;
-    margin-top: 0.8rem;
-    padding-left: 1.5rem;
-    padding-top: 1.5rem;
-  }
-  .pdf-info-header {
-    position: absolute;
-    color: rgb(31, 30, 30);
-    font-weight: 500;
-    font-size: 0.65rem;
-    left: 0;
-    width: 100%!important;
-    padding-left: 4px;
-    border-bottom: 1px solid black;
   }
 }

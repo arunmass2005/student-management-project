@@ -4,7 +4,7 @@ export default function Update() {
     const inputv = document.querySelector("input");
     const formData = new FormData();
     formData.append("name", inputv.value);
-    const api = await fetch("http://192.168.216.65:8000/students/ASASD", {
+    const api = await fetch("http://localhost:8000/students/ASASD", {
       method: "PUT",
       // headers:{
       //     'content-type':'form-data'

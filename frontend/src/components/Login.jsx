@@ -4,7 +4,7 @@ import { Navigate, redirect, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Loading from "./Loading.jsx";
-export default () => {
+export default function Login() {
   const [islogging, setlogging] = useState(null);
   console.log("in login");
   function setToLocal(Apidata) {
@@ -16,13 +16,10 @@ export default () => {
     navigate("/dashboard", { replace: true });
   }
   async function check(logindata) {
-    const api = await fetch(
-      "http://192.168.216.65:8000/students/login/check/",
-      {
-        method: "POST",
-        body: logindata,
-      }
-    );
+    const api = await fetch("http://localhost:8000/students/login/check/", {
+      method: "POST",
+      body: logindata,
+    });
     const resp = await api.json();
     if (resp.suc) {
       setToLocal(resp.suc);
@@ -108,8 +105,18 @@ export default () => {
             <span className="underline" id="password-underline"></span>
           </div>
           <div className="fgnew">
-            <Link to="/forgetpassword">forget password</Link>
-            <Link to="/register">register</Link>
+            <div className="forgot-ctn flex-center-col">
+              <Link className={"login-link"} to="/forgot/userid">
+                forgot userid
+              </Link>
+              <Link className={"login-link"} to="/forgot/password">
+                forgot password
+              </Link>
+            </div>
+
+            <Link className={"login-link"} to="/register">
+              New user?register
+            </Link>
           </div>
           <button type="submit" className="btn">
             SUBMIT
@@ -118,4 +125,4 @@ export default () => {
       </div>
     </>
   );
-};
+}

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { defaultimg } from "./scripts";
 
 function Topbar({ stData }) {
-  const st_img = `http://192.168.216.65:8000/students${stData.profile}`;
+  const st_img = `http://localhost:8000/students${stData.profile}`;
   return (
     <>
       <div className="topbar-container" id="topbar-container">

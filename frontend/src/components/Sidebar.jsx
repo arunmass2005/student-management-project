@@ -25,12 +25,9 @@ export default function Sidebar() {
     } else return null;
   }
   async function _delete(mobile) {
-    const api = await fetch(
-      `http://192.168.216.65:8000/students/delete/${mobile}`,
-      {
-        method: "delete",
-      }
-    );
+    const api = await fetch(`http://localhost:8000/students/delete/${mobile}`, {
+      method: "delete",
+    });
     const resp = await api.json();
 
     if (resp.suc) {
@@ -47,7 +44,11 @@ export default function Sidebar() {
   }
   function deleteSt() {
     const local = getFromLocal();
-    confirm("Do you want delete?") ? _delete(local.mobile) : null;
+    confirm(
+      "Do you want to delete your's data\n in future it cannot be recovered ?"
+    )
+      ? _delete(local.mobile)
+      : null;
   }
 
   return (

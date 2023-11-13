@@ -15,7 +15,7 @@ function Edit() {
   const local = useOutletContext()[0];
   const [stData, setStData] = useState();
   const [formData, setFormData] = useState(new FormData());
-  const st_img = `http://192.168.216.65:8000/students${
+  const st_img = `http://localhost:8000/students${
     stData ? stData.profile : local.profile
   }`;
   const navigate = useNavigate();
@@ -74,7 +74,7 @@ function Edit() {
   async function editStData() {
     const formdata = objTOform(formData);
     const api = await fetch(
-      `http://192.168.216.65:8000/students/login/${stData.userid}`,
+      `http://localhost:8000/students/login/${stData.userid}`,
       {
         method: "PUT",
         body: formdata,
@@ -222,7 +222,7 @@ function Edit() {
               <DropdownInput
                 field={"caste"}
                 value={stData.caste}
-                id={dpId ? dpId : local["community"]}
+                id={dpId ? dpId : null}
                 parent={"community"}
                 edit={changeValue}
               />
@@ -343,10 +343,7 @@ function Edit() {
                 onChange={changeValue}
               /> */}
             </div>
-            <div className="editdiv">
-              <label htmlFor="location-type-show">Location Type</label>
-              <DropdownInput field="location_type" value={stData.location_type} edit={changeValue} />
-            </div>
+
             <div className="editdiv">
               <label htmlFor="taluk-show">Taluk</label>
               <DropdownInput
@@ -364,7 +361,14 @@ function Edit() {
                 onChange={changeValue}
               /> */}
             </div>
-
+            <div className="editdiv">
+              <label htmlFor="location-type-show">Location Type</label>
+              <DropdownInput
+                field="location_type"
+                value={stData.location_type}
+                edit={changeValue}
+              />
+            </div>
             <div className="editdiv">
               <label htmlFor="vilage-show">Vilage/Town</label>
               <input

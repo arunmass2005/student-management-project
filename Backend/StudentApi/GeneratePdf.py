@@ -95,7 +95,7 @@ def generatePdf(data):
         )
     )
     # create canva for pdf
-    c = canvas.Canvas(f"{settings.BASE_DIR}/st_pdfs/{data['name']}.pdf" ,pagesize=A4)
+    c = canvas.Canvas(f"{settings.BASE_DIR}/static/st_pdfs/{data['name']}.pdf" ,pagesize=A4)
     c.translate(cm, cm)
     print(cm)
     w, h = 21, 29.1

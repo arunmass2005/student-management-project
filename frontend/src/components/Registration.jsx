@@ -4,7 +4,12 @@ import DropdownInput from "./DropdownInput.jsx";
 import { useNavigate } from "react-router-dom";
 import Requirements from "./Requirements.jsx";
 import Loading from "./Loading.jsx";
-import { handleErrorField, createErrNode, checkEmpty } from "./scripts.js";
+import {
+  handleErrorField,
+  createErrNode,
+  checkEmpty,
+  objTOform,
+} from "./scripts.js";
 function Registration() {
   const sections = [
     "login-credentials-info",
@@ -23,6 +28,8 @@ function Registration() {
   const [dpId, setDpId] = useState("");
   const [req, setReq] = useState({});
   const [isLoad, setLoad] = useState();
+  const [image, setImage] = useState();
+  let dob = "+";
   const [current, setCurrent] = useState({
     id: 0,
     current: "login-credentials-info",
@@ -36,18 +43,12 @@ function Registration() {
     console.log("runned use effect");
     isCheckExist ? checkExists(checkList) : checkFurther();
   }
-  const a = {
-    name: "arun",
-  };
 
   function checkFurther() {
     let temp = [];
-    console.log("before req");
-    console.log(req);
     if (req) {
       Object.entries(req).forEach(([k, v]) => {
         if (v === false) {
-          console.log(k + "ifhave");
           temp.push(k.trim());
         }
       });
@@ -89,9 +90,9 @@ function Registration() {
 
   async function loginpost(formData) {
     try {
-      const api = await fetch("http://192.168.216.65:8000/students/login/", {
+      const api = await fetch("http://localhost:8000/students/login/", {
         method: "POST",
-        body: formData,
+        body: objTOform(formData),
       });
       const resp = await api.json();
 
@@ -109,29 +110,34 @@ function Registration() {
   function profileChange() {
     console.log("clicked");
     const profileInput = document.querySelector("#profile_input");
+    const profileImgData = profileInput.files[0];
     const profileImg = document.querySelector("#profile_img");
-    profileImg.src = URL.createObjectURL(profileInput.files[0]);
+    profileImg.src = URL.createObjectURL(profileImgData);
+    setImage(profileImgData);
   }
   function profile() {
     const Profile = document.getElementById("profile_input");
     Profile.click();
   }
   function Submit(e) {
-    const formData = new FormData();
+    const temp = {};
+    // ad separate input for image
+    const profileIp = document.querySelector(".profile_input");
+    temp["profile"] = profileIp.files[0];
     const inputs = document.querySelectorAll(".input");
     inputs.forEach((ele) => {
-      if (ele.id == "profile_input") {
-        formData.append("profile", ele.files[0]);
-        console.log(ele.files[0]);
-      } else if (ele.getAttribute("dp_key"))
-        formData.append(ele.name, parseInt(ele.getAttribute("dp_key")));
+      if (ele.getAttribute("dp_key"))
+        temp[ele.name] = parseInt(ele.getAttribute("dp_key"));
       else if (ele.type == "radio") {
-        if (ele.checked) formData.append(ele.name, ele.value);
-      } else formData.append(ele.name, ele.value);
+        if (ele.checked) {
+          temp[ele.name] = ele.value;
+        }
+      } else {
+        temp[ele.name] = ele.value;
+      }
     });
 
-    console.log(formData);
-    loginpost(formData);
+    loginpost(temp);
   }
   var checked = (e) => {
     e.checked = true;
@@ -275,13 +281,10 @@ function Registration() {
       formData.append(Ip.name, Ip.value);
     });
     console.log(formData);
-    const api = await fetch(
-      "http://192.168.216.65:8000/students/details/exists",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    const api = await fetch("http://localhost:8000/students/details/exists", {
+      method: "POST",
+      body: formData,
+    });
     const resp = await api.json();
     if (resp.suc) {
       setLoad(null);
@@ -319,21 +322,30 @@ function Registration() {
       : null;
     e.target.classList.remove("errorInputField");
   }
-  function dateSplitter(e){
-    const ipValue = e.target.value
-    if(ipValue.length ===2){
-      if(ipValue.endsWith("/")){
-        e.target.value = ipValue.slice(0,1)
-      }else
-      e.target.value = ipValue+"/"
-    }
-    else if(ipValue.length ===5){
-      if(ipValue.endsWith("/")){
-        e.target.value = ipValue.slice(0,4)
-      }else
-      e.target.value = ipValue+"/"
-    }
-
+  function dateSplitter(e) {
+    const ipValue = e.target.value;
+    // if(ipValue.length ==2 || ipValue.length ==3){
+    //   if(ipValue.length===3 && dob=="-"){
+    //     e.target.value = ipValue.slice(0,1)
+    //   }else{
+    //   e.target.value = ipValue+"/"
+    //   dob = "-"
+    // }
+    // }
+    // else if(ipValue.length ===5 ||ipValue.length ===6){
+    //   console.log(ipValue)
+    //   console.log(dob)
+    //   if(ipValue.length===6 && dob==="-"){
+    //     console.log(ipValue)
+    //     e.target.value = ipValue.slice(0,5)
+    //   }else{
+    //   console.log(ipValue)
+    //   console.log(dob)
+    //   e.target.value = ipValue+"/"}
+    // }
+    // // if(ipValue.length ===10){
+    // //   dob = "-"
+    // // }
   }
   return (
     <>
@@ -446,7 +458,7 @@ function Registration() {
                 }}
               />
               <span
-                class="material-symbols-outlined eye-icon"
+                className="material-symbols-outlined eye-icon"
                 onClick={toggleEyes}
               >
                 visibility_off
@@ -521,19 +533,20 @@ function Registration() {
               <label htmlFor="profileinput">Add Profile</label>
             </div>
             <div className="inputdiv required">
-              <label htmlFor="dob-input" id="dob-label">Date Of Birth</label>
+              <label htmlFor="dob-input" id="dob-label">
+                Date Of Birth
+              </label>
               <input
                 autoComplete="off"
                 type="text"
                 required
-                inputMode="numeric"
                 className="dob-input input"
                 name="dob"
                 placeholder="date/month/year"
                 maxLength={10}
-                onChange={(e)=>{
-                  dateSplitter(e)
-                  removeErrorInput(e)
+                onChange={(e) => {
+                  dateSplitter(e);
+                  removeErrorInput(e);
                 }}
               />
             </div>
@@ -670,7 +683,10 @@ function Registration() {
             </div>
             <div className="inputdiv required">
               <label htmlFor="location-type-input">Location Type</label>
-              <DropdownInput field="location_type" onChange={removeErrorInput} />
+              <DropdownInput
+                field="location_type"
+                onChange={removeErrorInput}
+              />
             </div>
             <div className="inputdiv required">
               <label htmlFor="vilage-input">Vilage/Town</label>
@@ -832,7 +848,6 @@ function Registration() {
                   className="ifsc-input input"
                   name="ifsc"
                   placeholder="ifsc code"
-                  style={{ textTransform: "capitalize" }}
                   onChange={removeErrorInput}
                 />
               </div>

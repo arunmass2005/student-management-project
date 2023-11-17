@@ -31,15 +31,15 @@ SECRET_KEY = "django-insecure-f+$*txhm!$ht^rx!p3*vdw%p-di8@z9cws75r2c)$7-9&4jd(o
 DEBUG = False
 
 # CORS_ORIGIN_WHITELIST = "http://localhost:8000"
-CORS_ALLOWED_ORIGINS = ['http://localhost:8000',]
-CORS_ALLOW_ALL_ORIGINS = True
-# CORS_URLS_REGEX = r'^.*'
-# CSRF_TRUSTED_ORIGINS = [
-#     'http://localhost:8000',
-#     'http://127.0.0.1:8000'
-# ]
+# CORS_ALLOWED_ORIGINS = ['http://localhost:8000',"Arunmass2022.pythonanywhere.com"]
+# CORS_ALLOW_ALL_ORIGINS = True
+# # CORS_URLS_REGEX = r'^.*'
+# # CSRF_TRUSTED_ORIGINS = [
+# #     'http://localhost:8000',
+# #     'http://127.0.0.1:8000'
+# # ]
 
-ALLOWED_HOSTS = ["localhost",""]
+ALLOWED_HOSTS = ["localhost","Arunmass2022.pythonanywhere.com"]
 # CORS_ALLOW_HEADERS = (
 #     "accept",
 #     "authorization",
@@ -148,9 +148,11 @@ STATICFILES_FINDERS = [
 ]
 STATIC_URL = "/static/"
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static",
-]
+STATIC_ROOT = os.path.join(BASE_DIR,'static')
+
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
 # STATIC_ROOT = BASE_DIR/"static"
 # print(STATICFILES_DIRS, "/home/arun/Desktop/FullStack/Backend/static")
 # Default primary key field type

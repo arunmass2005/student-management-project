@@ -28,21 +28,27 @@ MEDIA_URL = "/images/"
 SECRET_KEY = "django-insecure-f+$*txhm!$ht^rx!p3*vdw%p-di8@z9cws75r2c)$7-9&4jd(o"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # CORS_ORIGIN_WHITELIST = "http://localhost:8000"
+CORS_ALLOWED_ORIGINS = ['http://localhost:8000',]
 CORS_ALLOW_ALL_ORIGINS = True
+# CORS_URLS_REGEX = r'^.*'
+# CSRF_TRUSTED_ORIGINS = [
+#     'http://localhost:8000',
+#     'http://127.0.0.1:8000'
+# ]
 
-ALLOWED_HOSTS = ["*"]
-CORS_ALLOW_HEADERS = (
-    "accept",
-    "authorization",
-    "content-type",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-    "ngrok-skip-browser-warning"
-)
+ALLOWED_HOSTS = ["localhost",""]
+# CORS_ALLOW_HEADERS = (
+#     "accept",
+#     "authorization",
+#     "content-type",
+#     "user-agent",
+#     "x-csrftoken",
+#     "x-requested-with",
+#     "ngrok-skip-browser-warning"
+# )
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -61,7 +67,6 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
-    "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",

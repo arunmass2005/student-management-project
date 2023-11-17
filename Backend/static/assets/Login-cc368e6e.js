@@ -28,6 +28,7 @@ function y() {
   async function m(s) {
     const o = await (
       await fetch("http://localhost:8000/students/login/check/", {
+        withCredentials: true,
         method: "POST",
         body: s,
       })
@@ -61,7 +62,10 @@ function y() {
           id: "form",
           onSubmit: g,
           children: [
-            e.jsx("span", { className: "login-title", children: "Login" }),
+            e.jsx("span", {
+              className: "login-title",
+              children: "TECIS Login",
+            }),
             e.jsxs("div", {
               className: "userid-outer",
               children: [

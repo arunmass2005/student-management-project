@@ -28,18 +28,18 @@ MEDIA_URL = "/images/"
 SECRET_KEY = "django-insecure-f+$*txhm!$ht^rx!p3*vdw%p-di8@z9cws75r2c)$7-9&4jd(o"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # CORS_ORIGIN_WHITELIST = "http://localhost:8000"
 # CORS_ALLOWED_ORIGINS = ['http://localhost:8000',"Arunmass2022.pythonanywhere.com"]
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
 # # CORS_URLS_REGEX = r'^.*'
 # # CSRF_TRUSTED_ORIGINS = [
 # #     'http://localhost:8000',
 # #     'http://127.0.0.1:8000'
 # # ]
 
-ALLOWED_HOSTS = ["localhost","Arunmass2022.pythonanywhere.com"]
+ALLOWED_HOSTS = ["*"]
 # CORS_ALLOW_HEADERS = (
 #     "accept",
 #     "authorization",
@@ -98,9 +98,9 @@ WSGI_APPLICATION = "BackendApi.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "mysql.connector.django",
         "NAME": "tecdb",
-        "USER": "root",
+        "USER": "arun",
         "PASSWORD": "arunsmiley",
         "HOST": "localhost",
         "PORT": "3306",
@@ -148,11 +148,10 @@ STATICFILES_FINDERS = [
 ]
 STATIC_URL = "/static/"
 
-STATIC_ROOT = os.path.join(BASE_DIR,'static')
 
-# STATICFILES_DIRS = [
-#     BASE_DIR / "static",
-# ]
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 # STATIC_ROOT = BASE_DIR/"static"
 # print(STATICFILES_DIRS, "/home/arun/Desktop/FullStack/Backend/static")
 # Default primary key field type

@@ -1,8 +1,7 @@
-django
-mysql-connector-python
+Django
 reportlab
 requests
 django-cors-headers
 djangorestframework
-mysqlclient
 pillow
+

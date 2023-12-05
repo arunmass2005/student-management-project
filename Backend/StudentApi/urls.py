@@ -15,4 +15,3 @@ urlpatterns = [
     path("generatePdf", generatePdfView.as_view()),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns +=static(settings.STATIC_URL,document_root = settings.STATICFILES_DIRS)
-print("after student urls")

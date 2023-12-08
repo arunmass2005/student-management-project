@@ -1,7 +1,25 @@
 from django.db import models
 
 
-# Create your models here.
+# Cr
+class graduation(models.Model):
+    value = models.CharField(max_length=4)
+
+    def __str__(self):
+        return self.value
+
+class degree(models.Model):
+    value = models.CharField(max_length=1000)
+    graduationId= models.SmallIntegerField()
+    def __str__(self):
+        return self.value
+
+class course(models.Model):
+    value = models.CharField(max_length=1000)
+    degreeId = models.SmallIntegerField()
+    def __str__(self):
+        return self.value
+# ----------------------------------------------------------
 class gender(models.Model):
     value = models.CharField(max_length=20)
 

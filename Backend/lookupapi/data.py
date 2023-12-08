@@ -6,6 +6,32 @@ SALUTATION = [
     {"key": 4, "value": "Thirumathi"},
 ]
 
+
+GRADUATION = [
+    {"key":1,"value":"UG"},
+    {"key":2,"value":"PG"}
+]
+DEGREE = [
+    {"key":1,"value":"Bachelor Of Engineering(B.E)","graduationId":1},
+    {"key":2,"value":"Bachelor Of Technology(B.Tech)","graduationId":1},
+    {"key":3,"value":"Master Of Engineering(M.E)","graduationId":2},
+    {"key":4,"value":"Master of Business Administration(MBA)","graduationId":3},
+    {"key":5,"value":"Master of Computer Application(MCA)","graduationId":3}
+]
+COURSE = [
+    {"key":1,"value":"Computer Science & Engineering","degreeId":1},
+    {"key":2,"value":"Electronics & Communication Engineeringering","degreeId":1},
+    {"key":3,"value":"Electrical & Electronics Engineering","degreeId":1},
+    {"key":4,"value":"Civil Engineering","degreeId":1},
+    {"key":5,"value":"Mechanical Engineering","degreeId":1},
+    {"key":6,"value":"Artificial Intelligence & Data Science","degreeId":2},
+    {"key":7,"value":"Information Technology","degreeId":2},
+    {"key":8,"value":"Computer Science & Engineering","degreeId":3},
+    {"key":9,"value":"VLSI Design","degreeId":3},
+    {"key":10,"value":"Construction Engineering & Management","degreeId":3},
+    {"key":11,"value":"Engineering Design","degreeId":3},
+    {"key":12,"value":"Construction Engineering & Management","degreeId":3}
+]
 GENDER =[
     {"key":1,"value":"male"},
     {"key":2,"value":"female"},

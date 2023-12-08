@@ -79,19 +79,19 @@ def generatePdf(data):
     pdfmetrics.registerFont(
         TTFont(
             "Poppins-SemiBold",
-            "/home/arun/Desktop/FullStack/Backend/StudentApi/poppins_files/Poppins-SemiBold.ttf",
+            f"{settings.BASE_DIR}/StudentApi/poppins_files/Poppins-SemiBold.ttf",
         )
     )
     pdfmetrics.registerFont(
         TTFont(
             "Poppins-Regular",
-            "/home/arun/Desktop/FullStack/Backend/StudentApi/poppins_files/Poppins-Regular.ttf",
+            f"{settings.BASE_DIR}/StudentApi/poppins_files/Poppins-Regular.ttf",
         )
     )
     pdfmetrics.registerFont(
         TTFont(
             "Poppins-Bold",
-            "/home/arun/Desktop/FullStack/Backend/StudentApi/poppins_files/Poppins-Bold.ttf",
+           f"{settings.BASE_DIR}/StudentApi/poppins_files/Poppins-Bold.ttf",
         )
     )
     # create canva for pdf

@@ -1,20 +1,10 @@
-from typing import Any
 from django.db import models
-from datetime import datetime
 # Create your models here.
 # custom date 
-class DateMonthYearField(models.DateField):
-    def to_python(self,value):
-        if value:
-            return datetime.strptime(value,'%D-%M-%Y').date()
-        return None
-    def get_prep_value(self,value):
-        if value:
-            return value.strftime('%D-%M-%Y')
-        return ''
 
 class StudentsModel(models.Model):
     profile = models.ImageField(upload_to="students",null=True)
+
     name = models.CharField(max_length=100)
     dob = models.CharField(max_length=20)
     gender = models.PositiveSmallIntegerField()
@@ -23,6 +13,13 @@ class StudentsModel(models.Model):
     religion = models.PositiveSmallIntegerField()
     community = models.PositiveSmallIntegerField()
     caste = models.PositiveIntegerField()
+    # academic
+    graduation = models.PositiveSmallIntegerField(null=True)
+    degree = models.PositiveSmallIntegerField(null=True)
+    course = models.PositiveSmallIntegerField(null=True)
+    academic_year = models.PositiveSmallIntegerField(null=True)
+    rollno = models.CharField(max_length=20, unique=True,null=True)
+
     aadhar = models.CharField(max_length=12, unique=True)
     firstgraduate = models.CharField(max_length=10)
     mobile = models.CharField(max_length=15,unique = True)
@@ -33,7 +30,7 @@ class StudentsModel(models.Model):
     location_type = models.CharField(max_length=5)
     taluk = models.PositiveSmallIntegerField()
     place = models.CharField(max_length=50)
-    pincode = models.CharField(max_length = 20,null = True)
+    pincode = models.CharField(max_length = 20,null=True)
     address = models.TextField()
     fathersname = models.CharField(max_length=100)
     fathersoccupation = models.CharField(max_length=100)

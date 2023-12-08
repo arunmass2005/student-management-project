@@ -34,11 +34,18 @@ class lookupapiView(APIView):
         Id = kwargs.get("Id")
         id = kwargs.get("id")
         if Id == None and id == None:
-            print("in if")
-            print(value)
             match value:
                 case "gender":
                     f_data = self.__getData(gender, genderSerializer)
+                    return JsonResponse(f_data.data, safe=False)
+                case "graduation":
+                    f_data = self.__getData(graduation, graduationSerializer)
+                    return JsonResponse(f_data.data, safe=False)
+                case "degree":
+                    f_data = self.__getData(degree, degreeSerializer)
+                    return JsonResponse(f_data.data, safe=False)
+                case "course":
+                    f_data = self.__getData(course, courseSerializer)
                     return JsonResponse(f_data.data, safe=False)
                 case "bloodgroup":
                     f_data = self.__getData(bloodgroup, bloodgroupSerializer)
@@ -103,9 +110,6 @@ class lookupapiView(APIView):
                     return JsonResponse(f_data.data, safe=False)
 
         else:
-            print(Id)
-            print("in else")
-            print(value)
             match value:
                 case "caste":
                     f_data = self.__filterGetData(caste, casteSerializer,"communityId", id)

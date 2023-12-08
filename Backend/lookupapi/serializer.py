@@ -2,6 +2,25 @@ from rest_framework import serializers
 from .models import *
 
 
+class graduationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = graduation
+        fields = "__all__"
+
+class degreeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = degree
+        fields = "__all__"
+
+class courseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = course
+        fields = "__all__"
+
+class genderSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = gender
+        fields = "__all__"
 
 class genderSerializer(serializers.ModelSerializer):
     class Meta:

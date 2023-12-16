@@ -1,7 +1,6 @@
-import { useContext, useEffect, useState } from "react";
-import { SyncLoader } from "react-spinners";
+import { useEffect, useState } from "react";
+import { reverseDate } from "./scripts";
 import Loading from "./Loading";
-import { setFromApi, getFromApiV } from "./scripts";
 import { useOutletContext } from "react-router-dom";
 function Profile() {
   const outletData = useOutletContext()[0];
@@ -29,7 +28,6 @@ function Profile() {
         city: resp.CITY,
       });
     } else {
-      console.log(resp);
     }
   }
   function callBFunc() {
@@ -55,6 +53,72 @@ function Profile() {
             />
           </span>
         </div> */}
+        <section className="Academic-Info profile-sections">
+              <span className="section-header s-h-dash">
+                Academic Information
+              </span>
+
+              <div className="showdiv">
+                <label htmlFor="mobile-show">Graduation</label>
+                <input
+                  type="text"
+                  className="graduation-show show"
+                  name="graduation"
+                  readOnly
+                  value={stData.graduation}
+                />
+              </div>
+              <div className="showdiv">
+                <label htmlFor="degree-show">Degree</label>
+                <input
+                  type="text"
+                  className="degree-show show"
+                  name="degree"
+                  readOnly
+                  value={stData.degree}
+                />
+              </div>
+              <div className="showdiv">
+                <label htmlFor="course-show">Course</label>
+                <input
+                  type="text"
+                  className="course-show show"
+                  name="course"
+                  readOnly
+                  value={stData.course}
+                />
+              </div>
+              <div className="showdiv">
+                <label htmlFor="joined-show">Joined Date</label>
+                <input
+                  type="text"
+                  className="joined-show show"
+                  name="joined"
+                  readOnly
+                  value={reverseDate(stData.joined)}
+                />
+              </div>
+              <div className="showdiv">
+                <label htmlFor="academic_year-show">Academic Year</label>
+                <input
+                  type="text"
+                  className="academic_year-show show"
+                  name="academic_year"
+                  readOnly
+                  value={stData.academic_year}
+                />
+              </div>
+              <div className="showdiv">
+                <label htmlFor="rollno-show">Roll No.</label>
+                <input
+                  type="text"
+                  className="rollno-show show"
+                  name="rollno"
+                  readOnly
+                  value={stData.rollno}
+                />
+              </div>
+            </section>
             <section className="General-Info profile-sections">
               <span className="section-header s-h-dash">
                 {" "}
@@ -347,6 +411,7 @@ function Profile() {
                 />
               </div>
             </section>
+            
             <section className="Bank-Info profile-sections">
               <span className="section-header s-h-dash">
                 {" "}

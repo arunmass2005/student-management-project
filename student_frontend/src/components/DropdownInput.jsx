@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
+function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,className}) {
   console.log(id);
   const [data, setData] = useState([]);
   const [filtData, setFiltData] = useState(data);
   const [inData, setInData] = useState(data);
+
   useEffect(() => {
     async function getData() {
       if (parent && id) {
-        if (id) {
+        if (id[parent]) {
           var api = await fetch(
-            `http://localhost:8000/api/lookup/${field}/get/${id}`
+            `http://localhost:8000/api/lookup/${field}/filt/${id[parent]}`
           );
           let resp = await api.json();
           setData(resp);
@@ -44,7 +45,10 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
   function handleElementClick(arry) {
     close();
     setInData(arry);
-    setDpId ? setDpId(arry.id) : null;
+    setDpId ? setDpId((prev)=>(
+      {...prev,[field]:arry.id}
+    )) : null;
+    console.log(field,arry.id)
     edit ? edit({ field: field, id: arry.id }) : null;
   }
   function close() {
@@ -73,7 +77,7 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
     <>
       <input
         type="text"
-        className="input"
+        className={`${className?className:null} input`}
         placeholder={`Enter your ${field}`}
         onClick={(e) => {
           handleClick();
@@ -90,7 +94,6 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
         autoComplete="off"
         // onBlur={close}
       />
-      {console.log(inData.id)}
       <span
         className="material-symbols-outlined dp-icon"
         id={`dp-${field}-icon`}
@@ -114,7 +117,7 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange }) {
                   </div>
                 ))
               : parent
-              ? null
+              ?  null
               : filtData.map((arry) => (
                   <div
                     className="dp-elements"

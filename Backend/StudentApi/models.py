@@ -13,13 +13,12 @@ class StudentsModel(models.Model):
     religion = models.PositiveSmallIntegerField()
     community = models.PositiveSmallIntegerField()
     caste = models.PositiveIntegerField()
-    # academic
     graduation = models.PositiveSmallIntegerField(null=True)
     degree = models.PositiveSmallIntegerField(null=True)
     course = models.PositiveSmallIntegerField(null=True)
-    academic_year = models.PositiveSmallIntegerField(null=True)
+    academic_year = models.CharField(max_length=20, unique=True,null=True)
     rollno = models.CharField(max_length=20, unique=True,null=True)
-
+    joined = models.CharField(max_length=20, null=True)
     aadhar = models.CharField(max_length=12, unique=True)
     firstgraduate = models.CharField(max_length=10)
     mobile = models.CharField(max_length=15,unique = True)

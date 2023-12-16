@@ -16,7 +16,7 @@ function D({
     async function e() {
       if (u && n) {
         if (n) {
-          var o = await fetch(`http://localhost:8000/api/lookup/${t}/get/${n}`);
+          var o = await fetch(`http://localhost:8000/api/lookup/${t}/filt/${n}`);
           let s = await o.json();
           v(s), p(s);
         }

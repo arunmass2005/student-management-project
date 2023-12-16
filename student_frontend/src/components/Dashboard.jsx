@@ -5,6 +5,9 @@ import { getFromLocal, setFromApi } from "./scripts";
 import { useEffect, useState } from "react";
 import Loading from "./Loading";
 const getFromApiV = [
+  "graduation",
+  "degree",
+  "course",
   "gender",
   "bloodgroup",
   "religion",

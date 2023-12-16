@@ -12259,7 +12259,7 @@ function Ft({ field: A, id: e, setDpId: t, parent: r, value: n, edit: i }) {
   QA.useEffect(() => {
     async function w() {
       if (e)
-        var b = await W0.get(`http://127.0.0.1:8000/api/lookup/${A}/get/${e}`);
+        var b = await W0.get(`http://127.0.0.1:8000/api/lookup/${A}/filt/${e}`);
       else var b = await W0.get(`http://127.0.0.1:8000/api/lookup/${A}`);
       a(b.data), c(b.data);
     }

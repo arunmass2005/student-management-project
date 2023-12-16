@@ -22,10 +22,6 @@ class genderSerializer(serializers.ModelSerializer):
         model = gender
         fields = "__all__"
 
-class genderSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = gender
-        fields = "__all__"
 
 class bloodgroupSerializer(serializers.ModelSerializer):
     class Meta:

@@ -79,11 +79,19 @@ function checkEmpty(form) {
   let temp = [];
   const Form = document.querySelector(`.${form}`);
   const formInputs = Form.querySelectorAll(".input");
-  console.log(formInputs);
+  if(Form.querySelector(".profile_outer")){
+    const profile_input = Form.querySelector(".profile_input")
+    const profile_outer = Form.querySelector(".profile_outer")
+    if(profile_input.hasAttribute("required")){
+      console.log("profile inp[ut empty")
+      if(profile_input.value == ""){
+        handleErrorField(".profile_outer","required",true)
+        console.log(temp);
+      }
+    }
+  }
   formInputs.forEach((ip) => {
-    console.log(ip.hasAttribute("defaultValue"));
     if (ip.hasAttribute("required")) {
-      console.log(ip.defaultValue);
       if (ip.value == "") {
         temp.push({
           tagName: ip.tagName,
@@ -110,7 +118,10 @@ function removeErrorInput(e) {
     : null;
   e.target.classList.remove("errorInputField");
 }
-
+function reverseDate(date){
+  const newDate = new Date(date)
+  return `${newDate.getDay}/${newDate.getMonth}/${newDate.getFullYear}`
+}
 export {
   closeSidebar,
   setToLocal,
@@ -123,4 +134,5 @@ export {
   createErrNode,
   checkEmpty,
   removeErrorInput,
+  reverseDate,
 };

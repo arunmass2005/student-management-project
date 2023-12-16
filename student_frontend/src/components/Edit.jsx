@@ -20,7 +20,7 @@ function Edit() {
   }`;
   const navigate = useNavigate();
   const [fg, setfg] = useState(local ? local.firstgraduate : null);
-  const [dpId, setDpId] = useState("");
+  const [dpId, setDpId] = useState({});
   const [bankDetails, setBankDetails] = useState();
   useEffect(() => {
     setStData(local);
@@ -115,6 +115,92 @@ function Edit() {
           className="profile-container edit-container"
           id="profile-container"
         >
+          <section className="Academic-Info profile-sections">
+            <span className="section-header s-h-dash">
+              {" "}
+              Academic Information
+            </span>
+           
+            <div className="editdiv">
+              <label htmlFor="graduation-show">Graduation</label>
+              <DropdownInput
+                field={"graduation"}
+                value={stData.graduation}
+                edit={changeValue}
+                setDpId={setDpId}
+              />
+              
+            </div>
+            <div className="editdiv">
+              <label htmlFor="graduation-show">Degree</label>
+              <DropdownInput
+                field={"degree"}
+                value={stData.degree}
+                id={dpId ? dpId : null}
+                setDpId={setDpId}
+                parent={"graduation"}
+                edit={changeValue}
+              />
+              
+            </div>
+            <div className="editdiv">
+              <label htmlFor="course-show ">Course</label>
+              <DropdownInput
+                field={"course"}
+                id={dpId ? dpId : null}
+                value={stData.course}
+                parent={"degree"}
+                edit={changeValue}
+              />
+            
+            </div>
+            
+            
+            <div className="editdiv">
+              <label htmlFor="joined-show">Joined Date</label>
+              <input
+                required
+                type="date"
+                className="joined-show show"
+                name="joined"
+                maxLength={12}
+                defaultValue={stData.joined}
+                onChange={changeValue}
+                style={{
+                  fontFamily:"Poppins"
+                }}
+              />
+            </div>
+            <div className="editdiv">
+              <label htmlFor="academic_year-show">Acadmic Year</label>
+              <input
+                required
+                type="text"
+                className="academic_year-show show"
+                name="academic_year"
+                maxLength={12}
+                defaultValue={stData.academic_year}
+                onChange={changeValue}
+                
+              />
+            </div> 
+            <div className="editdiv">
+              <label htmlFor="rollno-show">Roll No.</label>
+              <input
+                required
+                type="text"
+                className="rollno-show show"
+                name="rollno"
+                maxLength={12}
+                defaultValue={stData.rollno}
+                onChange={changeValue}
+                style={{
+                  fontFamily:"Poppins"
+                }}
+              />
+            </div>
+           
+          </section>
           <section className="General-Info profile-sections">
             <span className="section-header s-h-dash">
               {" "}

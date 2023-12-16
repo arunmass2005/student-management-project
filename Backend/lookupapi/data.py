@@ -30,7 +30,8 @@ COURSE = [
     {"key":9,"value":"VLSI Design","degreeId":3},
     {"key":10,"value":"Construction Engineering & Management","degreeId":3},
     {"key":11,"value":"Engineering Design","degreeId":3},
-    {"key":12,"value":"Construction Engineering & Management","degreeId":3}
+    {"key":12,"value":"Not Applicable","degreeId":4},
+    {"key":13,"value":"Not Applicable","degreeId":5}
 ]
 GENDER =[
     {"key":1,"value":"male"},

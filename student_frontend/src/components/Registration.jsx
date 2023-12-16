@@ -1,42 +1,94 @@
-import { useEffect, useState } from "react";
-import { useFieldError } from "./useError.js";
+import { useState} from "react";
+import DatePicker from 'react-datepicker'
+import "flatpickr/dist/flatpickr.css";
+import "react-datepicker/dist/react-datepicker.css";
 import DropdownInput from "./DropdownInput.jsx";
 import { useNavigate } from "react-router-dom";
 import Requirements from "./Requirements.jsx";
 import Loading from "./Loading.jsx";
+
+import '../assets/DatePicker.css';
+import '../assets/Calendar.css';
 import {
   handleErrorField,
-  createErrNode,
   checkEmpty,
   objTOform,
 } from "./scripts.js";
+
+
 function Registration() {
   const sections = [
     "login-credentials-info",
-    "genral-info",
+    "academic-info",
+    "general-info",
     "contact-info",
     "bank-info",
   ];
   const sectionsHeader = [
     "Login Credentials",
+    "Academic Information",
     "General Information",
     "Contact Information",
     "Bank Information",
   ];
-  const signals = ["lg-signal", "gn-signal", "cn-signal", "bk-signal"];
+  const signals = [
+    "lg-signal",
+    "ac-signal",
+    "gn-signal",
+    "cn-signal",
+    "bk-signal",
+  ];
   const [bankDetails, setBankDetails] = useState({});
-  const [dpId, setDpId] = useState("");
+  const [dpId, setDpId] = useState({});
   const [req, setReq] = useState({});
   const [isLoad, setLoad] = useState();
   const [image, setImage] = useState();
+  const [isEmptyDrop, setEmptyDrop] = useState(false);
   let dob = "+";
+  const [selectedDate,setSelectedDate] = useState(null)
   const [current, setCurrent] = useState({
     id: 0,
     current: "login-credentials-info",
   });
 
   const navigate = useNavigate();
+  function formatDate(ipDate){
+    const date = new Date(ipDate)
+    const formattedDate = `${date.getDay()}/${date.getMonth()}/${date.getFullYear()}`
+    // let d =date
+    // const len = d.length
+    // console.log(len);
+    // let formattedDate  = ""
+    // for(let i = len-1;i>=0;i--){
+    //   console.log(i);
+    //   formattedDate+=date[i]
+    // }
+    console.log(formattedDate
+      )
+    return formattedDate
+  }
+  function setAcademicYear(joinedYear){
+    const academicInput = document.querySelector(".academic_year-input")
+    const startYear = parseInt(joinedYear)
+    const degree = document.querySelector(".graduation-input").value
+    if(degree.toLowerCase() == "ug"){
+      const endYear = startYear + 4
+      academicInput.value = `${startYear} - ${endYear}`
+      console.log(`${startYear} - ${endYear}`)
+    }
+    else if(degree.toLowerCase() == "pg"){
+      const endYear = startYear + 2
+      academicInput.value = `${startYear} - ${endYear}`
+      console.log(`${startYear} - ${endYear}`)
+    }
+  }
+  function setJoinedFunc(e){
+    const date = formatDate(document.querySelector(".joined-input").value)
+  
+    const strYear = date.slice((date.length - 4),date.length)
 
+    setAcademicYear(strYear)
+  }
   function handleSubmit(isCheckExist, checkList) {
     console.log(checkList);
     setLoad(true);
@@ -316,37 +368,19 @@ function Registration() {
       }
     } else return false;
   }
-  function removeErrorInput(e) {
+  function removeErrorInput(e,notInput) {
+    if(notInput){
+      document.querySelector(`.${e.name}-errorField`)
+      ? document.querySelector(`.${e.name}-errorField`).remove()
+      : null;
+    e.classList.remove("errorInputField");
+    }
     document.querySelector(`.${e.target.name}-errorField`)
       ? document.querySelector(`.${e.target.name}-errorField`).remove()
       : null;
     e.target.classList.remove("errorInputField");
   }
-  function dateSplitter(e) {
-    const ipValue = e.target.value;
-    // if(ipValue.length ==2 || ipValue.length ==3){
-    //   if(ipValue.length===3 && dob=="-"){
-    //     e.target.value = ipValue.slice(0,1)
-    //   }else{
-    //   e.target.value = ipValue+"/"
-    //   dob = "-"
-    // }
-    // }
-    // else if(ipValue.length ===5 ||ipValue.length ===6){
-    //   console.log(ipValue)
-    //   console.log(dob)
-    //   if(ipValue.length===6 && dob==="-"){
-    //     console.log(ipValue)
-    //     e.target.value = ipValue.slice(0,5)
-    //   }else{
-    //   console.log(ipValue)
-    //   console.log(dob)
-    //   e.target.value = ipValue+"/"}
-    // }
-    // // if(ipValue.length ===10){
-    // //   dob = "-"
-    // // }
-  }
+
   return (
     <>
       {isLoad ? <Loading /> : null}
@@ -359,16 +393,20 @@ function Registration() {
               <span className="sec-names">{sectionsHeader[0]}</span>
             </div>
             <div className="signal-div">
-              <div className={`gn-signal signal`}></div>
+              <div className={`ac-signal signal `}></div>
               <span className="sec-names">{sectionsHeader[1]}</span>
             </div>
             <div className="signal-div">
-              <div className={`cn-signal signal`}></div>
+              <div className={`gn-signal signal`}></div>
               <span className="sec-names">{sectionsHeader[2]}</span>
             </div>
             <div className="signal-div">
-              <div className={`bk-signal signal`}></div>
+              <div className={`cn-signal signal`}></div>
               <span className="sec-names">{sectionsHeader[3]}</span>
+            </div>
+            <div className="signal-div">
+              <div className={`bk-signal signal`}></div>
+              <span className="sec-names">{sectionsHeader[4]}</span>
             </div>
           </div>
         </div>
@@ -508,12 +546,118 @@ function Registration() {
           </form>
           <span className="section-footer"></span>
         </section>
+        <section className="academic-info">
+          <span className="section-header"> Academic Information</span>
+          <form className="reg-form">
+            <div className="inputdiv required">
+              <label htmlFor="gradyation-input">Graduation</label>
+              <DropdownInput
+                field="graduation"
+                onChange={removeErrorInput}
+                setDpId={setDpId}
+                className={"graduation-input"}
+              />
+            </div>
+            <div className="inputdiv required">
+              <label htmlFor="degree-input">Degree</label>
+              <DropdownInput
+                field="degree"
+                setDpId={setDpId}
+                id={dpId}
+                parent="graduation"
+                onChange={removeErrorInput}
+                
+              />
+            </div>
+            {isEmptyDrop ? null : (
+              <div className={"inputdiv required"}>
+                <label htmlFor="course-input">Course</label>
+                <DropdownInput
+                  field="course"
+                  id={dpId}
+                  parent="degree"
+                  onChange={removeErrorInput}
+                  setEmptyDrop={setEmptyDrop}
+                />
+              </div>
+            )}
+            <div className="inputdiv required">
+              <label htmlFor="joined-input" id="joined-label">
+                Joined
+              </label>
+              
+       
+           {/* <DatePicker selected={
+              selectedDate
+            
+           } onChange={
+            date=>{
+              setSelectedDate(date)
+            }
+           }
+           format="dd-MM-y" className={"input"}/> */}
+              <input
+                autoComplete="off"
+                type="date"
+                required
+                className="joined-input input"
+                name="joined"
+                placeholder="dd-mm-yyyy"
+                maxLength={10}
+                onChange={(e) => {
+                  setJoinedFunc(e)
+                  removeErrorInput(e);
+                }}
+              /> 
+            </div>
+            <div className="inputdiv required">
+              <label htmlFor="academic_year-input">Academic year</label>
+              <input
+                autoComplete="off"
+                type="text"
+                className="academic_year-input input"
+                name="academic_year"
+                required
+                readOnly = {true}
+                placeholder="Enter academic year"
+                onChange={removeErrorInput}
+              />
+            </div>
 
-        <section className="genral-info">
+            <div className="inputdiv ">
+              <label htmlFor="rollno-name-input">Register Number</label>
+              <input
+                autoComplete="off"
+                type="text"
+                className="rollno-name-input input"
+                name="rollno"
+                placeholder="Register number"
+                onChange={removeErrorInput}
+              />
+            </div>
+            <div className="btn-div">
+              <button type="button" className="btn" onClick={movePrevious}>
+                previous
+              </button>
+              <button
+                type="button"
+                className="btn"
+                onClick={(e) => {
+                  e.preventDefault();
+                  !checkEmpty("academic-info") ? moveNext() : null;
+                }}
+              >
+                next
+              </button>
+            </div>
+          </form>
+          <span className="section-footer"></span>
+        </section>
+        <section className="general-info">
           <span className="section-header"> General Information</span>
           <form className="reg-form">
-            <div className="profile" id="profilediv">
-              <span className="profile_outer" onClick={profile}>
+            <div className="profile " id="profilediv">
+              <span className="profile_outer" name="profile_outer_span" onClick={profile}>
                 <img
                   src="src/assets/preview-profile.png"
                   alt=""
@@ -525,12 +669,15 @@ function Registration() {
                   accept="image/*"
                   className="profile_input"
                   id="profile_input"
-                  onChange={profileChange}
+                  onChange={()=>{
+                    profileChange()
+                    removeErrorInput(document.querySelector(".profile_outer"),true)
+                  }}
                   name="profile"
-                  required={false}
+                  required
                 />
               </span>
-              <label htmlFor="profileinput">Add Profile</label>
+              <label htmlFor="profileinput " className="label_required_mark">Add Profile</label>
             </div>
             <div className="inputdiv required">
               <label htmlFor="dob-input" id="dob-label">
@@ -545,7 +692,7 @@ function Registration() {
                 placeholder="date/month/year"
                 maxLength={10}
                 onChange={(e) => {
-                  dateSplitter(e);
+    
                   removeErrorInput(e);
                 }}
               />
@@ -639,7 +786,7 @@ function Registration() {
                 className="btn"
                 onClick={(e) => {
                   e.preventDefault();
-                  !checkEmpty("genral-info")
+                  !checkEmpty("general-info")
                     ? handleSubmit(true, ["aadhar"])
                     : null;
                 }}

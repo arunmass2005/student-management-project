@@ -81,6 +81,15 @@ class lookupapiView(APIView):
                 case "gender":
                     f_data = self.__getSpecData(gender, genderSerializer, Id)
                     return JsonResponse(f_data.data, safe=False)
+                case "graduation":
+                    f_data = self.__getSpecData(graduation, graduationSerializer, Id)
+                    return JsonResponse(f_data.data, safe=False)
+                case "degree":
+                    f_data = self.__getSpecData(degree, degreeSerializer, Id)
+                    return JsonResponse(f_data.data, safe=False)
+                case "course":
+                    f_data = self.__getSpecData(course, courseSerializer, Id)
+                    return JsonResponse(f_data.data, safe=False)
                 case "bloodgroup":
                     f_data = self.__getSpecData(bloodgroup, bloodgroupSerializer, Id)
                     return JsonResponse(f_data.data, safe=False)
@@ -118,5 +127,13 @@ class lookupapiView(APIView):
 
                 case "taluk":
                     f_data = self.__filterGetData(taluk, talukSerializer,"districtId", id)
+                    print(f_data.data)
+                    return JsonResponse(f_data.data, safe=False)
+                case "degree":
+                    f_data = self.__filterGetData(degree, degreeSerializer,"graduationId", id)
+                    print(f_data.data)
+                    return JsonResponse(f_data.data, safe=False)
+                case "course":
+                    f_data = self.__filterGetData(course, courseSerializer,"degreeId", id)
                     print(f_data.data)
                     return JsonResponse(f_data.data, safe=False)

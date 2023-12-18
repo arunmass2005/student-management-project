@@ -165,11 +165,11 @@
 .sidebar-container {
   transition: all ease-in-out 0.2s;
   position: fixed;
-  left: 0;
-  top: 0;
+  left: .3rem;
+  top: .5%;
   cursor: pointer;
   background-color: #352cb6;
-  height: 100%;
+  height: 99%;
   padding-left: 0.3rem;
   padding-right: 0.3rem;
   display: flex;
@@ -178,8 +178,10 @@
   align-items: center;
   gap: 20px;
   z-index: 5;
+  border-radius:.5rem;
   box-shadow: 0px 0px 0.5rem 0.5rem rgba(0, 0, 0, 0.2);
 }
+
 .delete {
   background-color: #d93025;
 }
@@ -196,7 +198,7 @@
 }
 
 .sidebar-container .header {
-  margin-top: 1.2rem;
+  margin-top: .3rem;
   height: 4rem;
   background-color: #00000044;
 }
@@ -226,9 +228,20 @@
 }
 
 .main-content {
-  position: relative;
-  left: 4rem;
-  width: calc(100% - 4rem);
+  position: fixed;
+  top: 5rem;
+  width: calc(100% - 5rem);
+  left: 4.7rem;
+  height: calc(100% - 5.2rem);
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: blue #ffffff;
+  border-radius: 0.5rem;
+  border: 4px solid #352cb6;
+}
+.main-content::-webkit-scrollbar{
+  width: 2rem;
 }
 div:focus {
   outline: none;
@@ -245,12 +258,12 @@ div:focus {
 } */
 /* top barr */
 .topbar-container {
-  position: sticky;
-  width: calc(100% - 4rem);
+  position: fixed;
+  width: calc(100% - 5rem);
   max-height: 4.5rem;
-  top: 0;
-  left: 4rem;
-  z-index: 2000;
+  left: 4.7rem;
+  top: 0.3rem;
+  border-radius: 0.4rem;
   background-color: rgb(53, 44, 182);
   display: flex;
   align-items: center;
@@ -368,14 +381,13 @@ div:focus {
 .profile-container {
   transition: all ease-in-out 0.2s;
   display: flex;
-  height: 100%;
+  flex-direction: column;
+  height: auto;
   width: 100%;
   position: relative;
   align-items: center;
   background-color: #7cf6ff;
   justify-content: center;
-  flex-wrap: wrap;
-  flex-direction: column;
   color: rgb(77, 77, 77);
 }
 

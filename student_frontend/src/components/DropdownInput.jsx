@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 
-function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,className}) {
+function DropdownInput({
+  field,
+  id,
+  setDpId,
+  parent,
+  value,
+  edit,
+  onChange,
+  className,
+}) {
   console.log(id);
   const [data, setData] = useState([]);
   const [filtData, setFiltData] = useState(data);
@@ -8,16 +17,55 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,clas
 
   useEffect(() => {
     async function getData() {
-      if (parent && id) {
-        if (id[parent]) {
+      console.log("in useeffect", parent, id);
+      if (parent && setDpId && id) {
+        if(id[parent["parent"]]){
           var api = await fetch(
-            `http://localhost:8000/api/lookup/${field}/filt/${id[parent]}`
+            `http://localhost:8000/api/lookup/${field}/filt/${id[parent["parent"]]}`
           );
           let resp = await api.json();
+  
           setData(resp);
           setFiltData(resp);
-        }
-      } else {
+        }else{
+        var api = await fetch(
+          `http://localhost:8000/api/lookup/${field}/filt/${parent["id"]}`
+        );
+        let resp = await api.json();
+
+        setData(resp);
+        setFiltData(resp);}
+      } else if (parent && id) {
+        console.log("in parent && id", parent, id);
+        if (id[parent["parent"]]) {
+          console.log("in course")
+          // id&&edit&&value && setDpId ? setDpId((prev)=>(
+          //   {...prev,[field]:value.id}
+          // )) : null
+          var api = await fetch(
+            `http://localhost:8000/api/lookup/${field}/filt/${
+              id[parent["parent"]]
+            }`
+          );
+          let resp = await api.json();
+
+          setData(resp);
+          setFiltData(resp);
+        }else{
+          
+          var api = await fetch(
+            `http://localhost:8000/api/lookup/${field}/filt/${parent["id"]}`
+          );
+          let resp = await api.json();
+  
+          setData(resp);
+          setFiltData(resp);}
+      }
+      else {
+        // edit && value && setDpId
+        //   ? setDpId(field,value)
+        //   : null;
+
         const api = await fetch(`http://localhost:8000/api/lookup/${field}`);
         let resp = await api.json();
 
@@ -25,9 +73,9 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,clas
         setFiltData(resp);
       }
     }
+
     getData();
-    console.log(id);
-  }, [id ? id : null, field]);
+  }, [id, field, value, setDpId, parent]);
   function handleOutsideClick(e) {
     const thisIpTagName = e.target.name;
     // thisIpTagName == "SECTION" ? close() : null;
@@ -45,10 +93,8 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,clas
   function handleElementClick(arry) {
     close();
     setInData(arry);
-    setDpId ? setDpId((prev)=>(
-      {...prev,[field]:arry.id}
-    )) : null;
-    console.log(field,arry.id)
+    setDpId ? setDpId((prev) => ({ ...prev, [field]: arry.id })) : null;
+    console.log(field, arry.id);
     edit ? edit({ field: field, id: arry.id }) : null;
   }
   function close() {
@@ -75,19 +121,23 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,clas
   }
   return (
     <>
+      {/* { edit&&value && setDpId ? setDpId((prev)=>(
+            {...prev,[field]:value.id}
+          )) : null
+        } */}
       <input
         type="text"
-        className={`${className?className:null} input`}
+        className={`${className ? className : null} input`}
         placeholder={`Enter your ${field}`}
         onClick={(e) => {
           handleClick();
-          onChange(e);
+          onChange ? onChange(e) : null;
         }}
         onChange={(e) => {
           handleChange(e);
         }}
         value={inData.value}
-        defaultValue={value ? value : null}
+        defaultValue={value ? value["value"] : null}
         name={field}
         required
         dp_key={inData.id}
@@ -117,7 +167,7 @@ function DropdownInput({ field, id, setDpId, parent, value, edit, onChange ,clas
                   </div>
                 ))
               : parent
-              ?  null
+              ? null
               : filtData.map((arry) => (
                   <div
                     className="dp-elements"

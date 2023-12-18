@@ -41,15 +41,13 @@ function Dashboard() {
     <>
       {local ? (
         stData ? (
-          <div className="overall-container" id="overall-container">
-            <Sidebar />
-            <div className="content-top-container">
-              <Topbar stData={history.state ? history.state : stData} />
-              <main className="main-content">
-                <Outlet context={[history.state ? history.state : stData]} />
-              </main>
-            </div>
-          </div>
+            <><Sidebar />
+            <Topbar stData={history.state ? history.state : stData} />
+            <main className="main-content">
+              <Outlet context={[history.state ? history.state : stData]} />
+            </main>
+          </>
+
         ) : (
           <Loading />
         )

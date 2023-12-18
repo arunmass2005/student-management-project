@@ -65,7 +65,7 @@ function Profile() {
                   className="graduation-show show"
                   name="graduation"
                   readOnly
-                  value={stData.graduation}
+                  value={stData.graduation["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -75,7 +75,7 @@ function Profile() {
                   className="degree-show show"
                   name="degree"
                   readOnly
-                  value={stData.degree}
+                  value={stData.degree["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -85,7 +85,7 @@ function Profile() {
                   className="course-show show"
                   name="course"
                   readOnly
-                  value={stData.course}
+                  value={stData.course["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -95,7 +95,7 @@ function Profile() {
                   className="joined-show show"
                   name="joined"
                   readOnly
-                  value={reverseDate(stData.joined)}
+                  value={stData.joined}
                 />
               </div>
               <div className="showdiv">
@@ -162,7 +162,7 @@ function Profile() {
                   name="gender"
                   readOnly
                   // {...getFromApi('gender',stData.gender)}
-                  value={stData.gender}
+                  value={stData.gender["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -171,7 +171,7 @@ function Profile() {
                   type="text"
                   name="bloodgroup"
                   readOnly
-                  value={stData.bloodgroup}
+                  value={stData.bloodgroup["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -190,7 +190,7 @@ function Profile() {
                   className="religion-show show"
                   name="religion"
                   readOnly
-                  value={stData.religion}
+                  value={stData.religion["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -200,7 +200,7 @@ function Profile() {
                   className="community-show show"
                   name="community"
                   readOnly
-                  value={stData.community}
+                  value={stData.community["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -210,7 +210,7 @@ function Profile() {
                   className="caste-show show"
                   name="caste"
                   readOnly
-                  value={stData.caste}
+                  value={stData.caste["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -271,7 +271,7 @@ function Profile() {
                   className="country-show show"
                   name="country"
                   readOnly
-                  value={stData.country}
+                  value={stData.country["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -281,7 +281,7 @@ function Profile() {
                   className="state-show show"
                   name="state"
                   readOnly
-                  value={stData.state}
+                  value={stData.state["value"]}
                 />
               </div>
 
@@ -292,7 +292,7 @@ function Profile() {
                   className="district-show show"
                   name="district"
                   readOnly
-                  value={stData.district}
+                  value={stData.district["value"]}
                 />
               </div>
 
@@ -303,7 +303,7 @@ function Profile() {
                   className="taluk-show show"
                   name="taluk"
                   readOnly
-                  value={stData.taluk}
+                  value={stData.taluk["value"]}
                 />
               </div>
               <div className="showdiv">
@@ -313,7 +313,7 @@ function Profile() {
                   className="location-type-show show"
                   name="location_type"
                   readOnly
-                  value={stData.location_type.toUpperCase()}
+                  value={stData.location_type["value"].toUpperCase()}
                 />
               </div>
               <div className="showdiv">

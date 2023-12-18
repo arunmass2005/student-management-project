@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useState } from "react";
 import {
   getFromLocal,
@@ -138,7 +138,7 @@ function Edit() {
                 value={stData.degree}
                 id={dpId ? dpId : null}
                 setDpId={setDpId}
-                parent={"graduation"}
+                parent={{parent:"graduation",id:stData.graduation["id"]}}
                 edit={changeValue}
               />
               
@@ -149,7 +149,7 @@ function Edit() {
                 field={"course"}
                 id={dpId ? dpId : null}
                 value={stData.course}
-                parent={"degree"}
+                parent={{parent:"degree",id:stData.degree["id"]}}
                 edit={changeValue}
               />
             
@@ -304,23 +304,17 @@ function Edit() {
               /> */}
             </div>
             <div className="editdiv">
-              <label htmlFor="caste-show">Caste</label>
+              <label htmlFor="caste-show ">Caste</label>
               <DropdownInput
                 field={"caste"}
-                value={stData.caste}
                 id={dpId ? dpId : null}
-                parent={"community"}
+                value={stData.caste}
+                parent={{parent:"community",id:stData.community["id"]}}
                 edit={changeValue}
               />
-              {/* <input required
-                type="text"
-                className="caste-show show"
-                name="caste"
-                defaultValue={stData.caste.toUpperCase()}
-                onChange={changeValue}
-              /> */}
+            
             </div>
-            <div className="editdiv">
+                        <div className="editdiv">
               <label htmlFor="aadhar-show">Aadhar</label>
               <input
                 required
@@ -436,7 +430,7 @@ function Edit() {
                 field={"taluk"}
                 value={stData.taluk}
                 id={dpId ? dpId : local["district"]}
-                parent={"district"}
+                parent={{parent:"district",id:stData.district["id"]}}
                 edit={changeValue}
               />
               {/* <input required

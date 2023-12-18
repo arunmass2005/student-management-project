@@ -15,12 +15,8 @@ const getFromApiV = [
 import axios from "axios";
 function closeSidebar() {
   const sideBar = document.getElementById("sidebar");
-  const topBar = document.querySelector(".topbar-container");
-  const mainContent = document.querySelector(".main-content");
-  mainContent.classList.toggle("main-content-close");
+
   sideBar.classList.toggle("close");
-  console.log(topBar);
-  topBar.classList.toggle("topbarClose");
 }
 
 function setToLocal(data) {
@@ -37,7 +33,7 @@ async function setFromApi(fields, stData, setState) {
     const resp = await axios.get(
       `http://localhost:8000/api/lookup/${field}/${stData[field]}`
     );
-    stData[field] = resp.data.value;
+    stData[field] = { id:stData[field],value: resp.data.value };
   }
   console.log(stData);
   console.log("after printing stData");
@@ -79,13 +75,13 @@ function checkEmpty(form) {
   let temp = [];
   const Form = document.querySelector(`.${form}`);
   const formInputs = Form.querySelectorAll(".input");
-  if(Form.querySelector(".profile_outer")){
-    const profile_input = Form.querySelector(".profile_input")
-    const profile_outer = Form.querySelector(".profile_outer")
-    if(profile_input.hasAttribute("required")){
-      console.log("profile inp[ut empty")
-      if(profile_input.value == ""){
-        handleErrorField(".profile_outer","required",true)
+  if (Form.querySelector(".profile_outer")) {
+    const profile_input = Form.querySelector(".profile_input");
+    const profile_outer = Form.querySelector(".profile_outer");
+    if (profile_input.hasAttribute("required")) {
+      console.log("profile inp[ut empty");
+      if (profile_input.value == "") {
+        handleErrorField(".profile_outer", "required", true);
         console.log(temp);
       }
     }
@@ -118,9 +114,9 @@ function removeErrorInput(e) {
     : null;
   e.target.classList.remove("errorInputField");
 }
-function reverseDate(date){
-  const newDate = new Date(date)
-  return `${newDate.getDay}/${newDate.getMonth}/${newDate.getFullYear}`
+function reverseDate(date) {
+  const newDate = new Date(date);
+  return `${newDate.getDay}/${newDate.getMonth}/${newDate.getFullYear}`;
 }
 export {
   closeSidebar,

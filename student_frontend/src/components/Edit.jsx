@@ -170,6 +170,7 @@ function Edit() {
                   fontFamily:"Poppins"
                 }}
               />
+              <span id ="oflow-date">month/date/year</span>
             </div>
             <div className="editdiv">
               <label htmlFor="academic_year-show">Acadmic Year</label>
@@ -229,7 +230,7 @@ function Edit() {
                 type="text"
                 className="name-show input"
                 name="name"
-                defaultValue={stData.name.toUpperCase()}
+                defaultValue={stData.name}
                 onChange={changeValue}
               />
             </div>
@@ -254,7 +255,7 @@ function Edit() {
               {/* <input required
                 type="text"
                 name="gender"
-                defaultValue={stData.gender.toUpperCase()}
+                defaultValue={stData.gender}
                 onChange={changeValue}
               /> */}
             </div>
@@ -283,7 +284,7 @@ function Edit() {
                 type="text"
                 className="religion-show show"
                 name="religion"
-                defaultValue={stData.religion.toUpperCase()}
+                defaultValue={stData.religion}
                 onChange={changeValue}
               /> */}
             </div>
@@ -299,7 +300,7 @@ function Edit() {
                 type="text"
                 className="community-show show"
                 name="community"
-                defaultValue={stData.community.toUpperCase()}
+                defaultValue={stData.community}
                 onChange={changeValue}
               /> */}
             </div>
@@ -392,7 +393,7 @@ function Edit() {
                 type="text"
                 className="country-show show"
                 name="country"
-                defaultValue={stData.country.toUpperCase()}
+                defaultValue={stData.country}
               /> */}
             </div>
             <div className="editdiv">
@@ -402,7 +403,7 @@ function Edit() {
                 type="text"
                 className="state-show show"
                 name="state"
-                defaultValue={stData.state.toUpperCase()}
+                defaultValue={stData.state}
                 onChange={changeValue}
               /> */}
             </div>
@@ -419,7 +420,7 @@ function Edit() {
                 type="text"
                 className="district-show show"
                 name="district"
-                defaultValue={stData.district.toUpperCase()}
+                defaultValue={stData.district}
                 onChange={changeValue}
               /> */}
             </div>
@@ -437,7 +438,7 @@ function Edit() {
                 type="text"
                 className="taluk-show show"
                 name="taluk"
-                defaultValue={stData.taluk.toUpperCase()}
+                defaultValue={stData.taluk}
                 onChange={changeValue}
               /> */}
             </div>
@@ -456,7 +457,7 @@ function Edit() {
                 type="text"
                 className="vilage-show show"
                 name="place"
-                defaultValue={stData.place.toUpperCase()}
+                defaultValue={stData.place}
                 onChange={changeValue}
               />
             </div>
@@ -467,7 +468,7 @@ function Edit() {
                 type="text"
                 className="pincode-show show"
                 name="pincode"
-                defaultValue={stData.pincode.toUpperCase()}
+                defaultValue={stData.pincode}
                 onChange={changeValue}
               />
             </div>
@@ -478,7 +479,7 @@ function Edit() {
                 cols="30"
                 rows="10"
                 name="address"
-                defaultValue={stData.address.toUpperCase()}
+                defaultValue={stData.address}
                 onChange={changeValue}
                 style={{ fontFamily: "Popins,sans-serif" }}
               ></textarea>
@@ -490,7 +491,7 @@ function Edit() {
                 type="text"
                 className="father-name-show show"
                 name="fathersname"
-                defaultValue={stData.fathersname.toUpperCase()}
+                defaultValue={stData.fathersname}
                 onChange={changeValue}
               />
             </div>
@@ -501,7 +502,7 @@ function Edit() {
                 type="text"
                 className="f-occupation-show show"
                 name="fathersoccupation"
-                defaultValue={stData.fathersoccupation.toUpperCase()}
+                defaultValue={stData.fathersoccupation}
                 onChange={changeValue}
               />
             </div>
@@ -512,7 +513,7 @@ function Edit() {
                 type="text"
                 className="mother-name-show show"
                 name="mothersname"
-                defaultValue={stData.mothersname.toUpperCase()}
+                defaultValue={stData.mothersname}
                 onChange={changeValue}
               />
             </div>
@@ -523,7 +524,7 @@ function Edit() {
                 type="text"
                 className="m-occupation-show show"
                 name="mothersoccupation"
-                defaultValue={stData.mothersoccupation.toUpperCase()}
+                defaultValue={stData.mothersoccupation}
                 onChange={changeValue}
               />
             </div>

@@ -7,7 +7,7 @@ export default function Topbar() {
         <span className="dept">CSE department</span>
       </div>
       <div className="profile-ctn">
-        <span classname="stf-name" id="stf-name">Arun</span>
+        <span className="stf-name" id="stf-name">Arun</span>
         <div className="stf-img">
             <img src="https://static-00.iconduck.com/assets.00/profile-circle-icon-2048x2048-cqe5466q.png" alt="" />
         </div>

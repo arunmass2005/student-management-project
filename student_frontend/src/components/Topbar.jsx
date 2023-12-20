@@ -6,7 +6,11 @@ function Topbar({ stData }) {
   return (
     <>
       <div className="topbar-container" id="topbar-container">
-        <span className="student-profile-txt"><span class="material-symbols-outlined icon">account_circle</span>STUDENT PROFILE</span>
+        <span className="student-profile">
+          {" "}
+          <span class="material-symbols-outlined icon">account_circle</span>
+          <span className="student-profile-txt">STUDENT PROFILE</span>
+        </span>
         <div className="profile-name-container">
           <span className="st-name">{stData.name.toUpperCase()}</span>
           <span className="st-profile">

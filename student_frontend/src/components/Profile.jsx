@@ -89,7 +89,8 @@ function Profile() {
                 />
               </div>
               <div className="showdiv">
-                <label htmlFor="joined-show">Joined Date</label>
+                <label htmlFor="joined-show" id="joined-label">Joined Date</label>
+                
                 <input
                   type="text"
                   className="joined-show show"
@@ -97,6 +98,7 @@ function Profile() {
                   readOnly
                   value={stData.joined}
                 />
+                <span id ="oflow-date">year - month - date</span>
               </div>
               <div className="showdiv">
                 <label htmlFor="academic_year-show">Academic Year</label>

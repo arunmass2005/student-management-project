@@ -1,9 +1,13 @@
-import Dashboard from "./Main_Contents/Dashboard";
+import { lazy } from "react"
+//children is default wrapper that holds children compoentnt
 
-export default function Main() {
+// lazy loading compiontes
+
+export default function Main({children}) {
   return (
     <div className="main-block">
-        <Dashboard/>
+      {children}
     </div>
+    
   )
 }

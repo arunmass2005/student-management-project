@@ -585,6 +585,7 @@ function Registration() {
               <label htmlFor="joined-input" id="joined-label">
                 Joined
               </label>
+             
               
        
            {/* <DatePicker selected={

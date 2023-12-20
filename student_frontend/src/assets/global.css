@@ -8,7 +8,9 @@
   transition: all ease-in-out 0.2s;
   /* transition: all ease-in-out 0.2s; */
 }
-
+/* body{
+  background-color: #4b483c8e;
+} */
 :root {
   --edit-green: rgb(0, 206, 0);
   --cancel-red: rgb(255, 51, 0);
@@ -230,18 +232,29 @@
 .main-content {
   position: fixed;
   top: 5rem;
-  width: calc(100% - 5rem);
+  width: calc(100% - 5.2rem);
   left: 4.7rem;
-  height: calc(100% - 5.2rem);
+  height: calc(100% - 5.35rem);
   overflow-y: scroll;
   scroll-behavior: smooth;
-  scrollbar-width: thin;
-  scrollbar-color: blue #ffffff;
+
   border-radius: 0.5rem;
-  border: 4px solid #352cb6;
 }
-.main-content::-webkit-scrollbar{
-  width: 2rem;
+::-webkit-scrollbar{
+  width: 1em;
+}
+::-webkit-scrollbar-track{
+  position: fixed;
+  background-color: #352cb6;
+  border-radius:100vw;
+}
+::-webkit-scrollbar-thumb{
+  background-color: #7cf6ff;
+  border-radius:100vw;
+  border:4px solid #352cb6;
+}
+::-webkit-scrollbar-thumb:hover{
+  background-color: #3e7b7f;
 }
 div:focus {
   outline: none;
@@ -259,8 +272,8 @@ div:focus {
 /* top barr */
 .topbar-container {
   position: fixed;
-  width: calc(100% - 5rem);
-  max-height: 4.5rem;
+  width: calc(100% - 5.2rem);
+  max-height: 4.3rem;
   left: 4.7rem;
   top: 0.3rem;
   border-radius: 0.4rem;
@@ -274,10 +287,20 @@ div:focus {
   width: 100%;
   height: 1000px;
 }
-.student-profile-txt {
+.student-profile {
   color: #ffffff;
   font-weight: 700;
+  display:flex;
+  align-items:center;
+  gap:1vw;
   font-size: 2rem;
+
+  .icon{
+    font-size: 3rem;
+  }
+  .student-profile-txt{
+    letter-spacing: .2vw;
+  }
 }
 .profile-name-container {
   display: flex;
@@ -394,6 +417,7 @@ div:focus {
 .showdiv {
   width: 20rem;
   height: 5rem;
+  position:relative;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -839,6 +863,16 @@ input:valid ~ .underline {
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+#oflow-date{
+  position:absolute;
+  font-size:.5rem;
+  bottom:.2em;
+  left:2em;
+  letter-spacing:1.2px;
+  font-weight:700;
+  color:grey;
+
 }
 /* -------sections--------- */
 .profile-sections {

@@ -1,0 +1,12 @@
+.selected {
+  background-color: rgb(255, 255, 255);
+  color: blue !important;
+}
+
+.icon {
+  pointer-events: none;
+}
+
+.sd-text {
+  pointer-events: none;
+}/*# sourceMappingURL=blocks.css.map */
